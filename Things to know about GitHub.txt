@@ -1,0 +1,9 @@
+This is just a short explanantion about different features available with GitHub that I think will be useful to understand for our project.
+
+The repository is the main project (labeled CS-321-Project) where all of our files reside.
+
+Branches are used to make changes to certain things without finalizing them in the master branch. For example, if we have a Java file in our repository and I want to try to make a change/addition to it, I could make a branch and make changes to that file on that branch. If what I change/add ends up being good, then I can merge that branch with the master branch, making it the main version of the code available (this is where the "version control" part of GitHub comes in, as, if I remember correctly, merging branches doesn't get rid of the side branch, so you would have a "backup" of the code still existing in that side branch). If the changes/additions I make aren't good, I could just delete the branch.
+
+I would recommend getting the desktop version of GitHub because it makes it much easier to get the files in the repository on your computer, make changes to them, and then push your changes/additions into the repository because, with it, you're able to make a clone of the repository into your computer's file system and then push all the changes in the repository clone on your computer back into GitHub with just a push of a button.
+
+Last thing I can think of right now, I just want to bring attention to the fact that you can write a comment whenever you commit a change in the repository. It would be helpful to just write a short comment about what exactly you changed/what you added/why you changed or added a thing, just as a way of having some extra documentation and helping each other know where we are.
