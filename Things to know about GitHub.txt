@@ -7,3 +7,5 @@ Branches are used to make changes to certain things without finalizing them in t
 I would recommend getting the desktop version of GitHub because it makes it much easier to get the files in the repository on your computer, make changes to them, and then pull your changes/additions into the repository because, with it, you're able to make a clone of the repository into your computer's file system and then pull all the changes in the repository clone on your computer back into GitHub with just a push of a button.
 
 Last thing I can think of right now, I just want to bring attention to the fact that you can write a comment whenever you commit a change in the repository. It would be helpful to just write a short comment about what exactly you changed/what you added/why you changed or added a thing, just as a way of having some extra documentation and helping each other know where we are.
+
+If you click on the Commit button (next to Branches above the files), you can see all of the changes done to the repository. Each commit has a <> symbol next to it. If you click on it, you can see the repository as it was when that change was made.
