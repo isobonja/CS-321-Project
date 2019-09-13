@@ -13,7 +13,5 @@ Create graphics for different themes of cards
 Implement voice recognition for different themess
 Create menu(Start, restart, quit)
 Create page describing how to play game
-
-
-
+Stats (games played, games won, pairs made, game length)
 
