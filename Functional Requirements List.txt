@@ -1,0 +1,16 @@
+Create Card class
+Create Player class
+Create Computer class
+Implement a deck of cards
+Dealing and shuffling mechanisms
+Check to test for pairs
+Win condition
+Computer logic
+Implement voice recognition for numbered cards
+Implement computer voice responses
+Create graphics for cards
+Create graphics for different themes of cards
+Implement voice recognition for different themess
+Create menu(Start, restart, quit)
+Create page describing how to play game
+
