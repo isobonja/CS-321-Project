@@ -11,7 +11,8 @@ Implement computer voice responses
 Create graphics for cards
 Create graphics for different themes of cards
 Implement voice recognition for different themess
-Create menu(Start, restart, quit)
+Create main menu(Start, how to play, themes, quit)
+Create in-game menu (Resume, restart, how to play, return to main menu)
 Create page describing how to play game
 Stats (games played, games won, pairs made, game length)
 
