@@ -8,7 +8,7 @@ Win condition
 Computer logic
 Implement voice recognition for numbered cards
 Implement computer voice responses
-Create graphics for cards
+Create graphics for cards and text showing the number of pairs the player and the computer has
 Create graphics for different themes of cards
 Implement voice recognition for different themes
 Create main menu(Start, how to play, themes, quit)
