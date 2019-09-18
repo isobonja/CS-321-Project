@@ -16,3 +16,11 @@ Create in-game menu (Resume, restart, how to play, return to main menu)
 Create page describing how to play game
 Stats (games played, games won, pairs made, game length)
 
+
+THE ABSOLUTE IMPORTANT FUNCTIONAL REQUIREMENTS:
+Create the classes
+Implement deck of cards with working dealing and shuffling mechanisms
+Pair testing
+Win condition
+Computer logic
+Voice recognition and responding
