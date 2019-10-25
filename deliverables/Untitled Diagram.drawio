@@ -1,6 +1,6 @@
-<mxfile host="www.draw.io" modified="2019-10-25T21:17:22.178Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36" etag="Btj3aBzGeFXwOI2iFB0y" version="12.1.7" type="github" pages="1">
+<mxfile host="www.draw.io" modified="2019-10-25T21:35:51.539Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36" etag="nyy3q9pzgqzg57d3CzX8" version="12.1.7" type="github" pages="1">
   <diagram name="Page-1" id="13e1069c-82ec-6db2-03f1-153e76fe0fe0">
-    <mxGraphModel dx="1278" dy="499" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="#ffffff" math="0" shadow="0">
+    <mxGraphModel dx="721" dy="488" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="#ffffff" math="0" shadow="0">
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
@@ -15,6 +15,16 @@
         </mxCell>
         <mxCell id="h2LrEYGkR_tUPTiFK0vR-18" value="&lt;font style=&quot;font-size: 9px&quot;&gt;[invalidSpeech(String) &lt;br&gt;== true ]&lt;/font&gt;" style="text;html=1;resizable=0;points=[];autosize=1;align=left;verticalAlign=top;spacingTop=-4;" parent="7baba1c4bc27f4b0-2" vertex="1">
           <mxGeometry x="-90" y="210" width="100" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="TWL29Orh3dFk4JObwkPs-1" value="" style="endArrow=classic;html=1;exitX=-0.119;exitY=0.964;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1.45;entryY=0.69;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="7baba1c4bc27f4b0-2" target="h2LrEYGkR_tUPTiFK0vR-8">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-94.52000000000021" y="249.7800000000001" as="sourcePoint"/>
+            <mxPoint x="-96" y="299" as="targetPoint"/>
+            <Array as="points">
+              <mxPoint x="10" y="251"/>
+              <mxPoint x="10" y="299.5"/>
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="7baba1c4bc27f4b0-3" value="p1 : UserPlayer&lt;br&gt;p2 : ComputerPlayer" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;rounded=1;shadow=0;comic=0;labelBackgroundColor=none;strokeColor=#000000;strokeWidth=1;fillColor=#FFFFFF;fontFamily=Verdana;fontSize=12;fontColor=#000000;align=center;" parent="1" vertex="1">
           <mxGeometry x="400" y="80" width="140" height="370" as="geometry"/>
@@ -43,15 +53,6 @@
         </mxCell>
         <mxCell id="7baba1c4bc27f4b0-40" value="Use Case:&lt;br&gt;&lt;span class=&quot;TextRun  BCX0 SCXW245099814&quot; lang=&quot;EN-US&quot; style=&quot;margin: 0px ; padding: 0px ; background-color: rgb(255 , 255 , 255) ; font-size: 11pt ; font-family: &amp;#34;calibri&amp;#34; , &amp;#34;calibri_msfontservice&amp;#34; , sans-serif ; line-height: 18px&quot;&gt;&lt;span class=&quot;NormalTextRun  BCX0 SCXW245099814&quot; style=&quot;margin: 0px ; padding: 0px ; background-color: inherit&quot;&gt;Selecting a theme&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;TextRun  BCX0 SCXW245099814&quot; lang=&quot;EN-US&quot; style=&quot;margin: 0px ; padding: 0px ; background-color: rgb(255 , 255 , 255) ; font-size: 11pt ; font-family: &amp;#34;calibri&amp;#34; , &amp;#34;calibri_msfontservice&amp;#34; , sans-serif ; line-height: 18px&quot;&gt;&lt;span class=&quot;NormalTextRun  BCX0 SCXW245099814&quot; style=&quot;margin: 0px ; padding: 0px ; background-color: inherit&quot;&gt;&amp;nbsp;and entering&amp;nbsp;&lt;/span&gt;&lt;span class=&quot;ContextualSpellingAndGrammarError  BCX0 SCXW245099814&quot; style=&quot;margin: 0px ; padding: 0px ; background-repeat: repeat-x ; background-position: left bottom ; background-image: url(&amp;#34;data:image/gif;base64,R0lGODlhBQAEAPEDAABVzDNVzDNV/wAAACH5BAUAAAMALAAAAAAFAAQAAAIInC2QchYKQgEAOw==&amp;#34;) ; border-bottom: 1px solid transparent ; background-color: inherit&quot;&gt;game&lt;/span&gt;&lt;span class=&quot;NormalTextRun  BCX0 SCXW245099814&quot; style=&quot;margin: 0px ; padding: 0px ; background-color: inherit&quot;&gt;&amp;nbsp;loop&lt;/span&gt;&lt;/span&gt;" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeColor=#000000;strokeWidth=1;fillColor=#FFFFFF;fontFamily=Verdana;fontSize=12;fontColor=#000000;" parent="1" vertex="1">
           <mxGeometry x="100" y="30" width="300" height="35" as="geometry"/>
-        </mxCell>
-        <mxCell id="h2LrEYGkR_tUPTiFK0vR-17" value="" style="endArrow=classic;html=1;exitX=-0.119;exitY=0.964;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" target="h2LrEYGkR_tUPTiFK0vR-8" edge="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="154.04999999999995" y="319.28" as="sourcePoint"/>
-            <mxPoint x="240" y="316" as="targetPoint"/>
-            <Array as="points">
-              <mxPoint x="260" y="320"/>
-            </Array>
-          </mxGeometry>
         </mxCell>
         <mxCell id="h2LrEYGkR_tUPTiFK0vR-19" value="Break" style="text;html=1;resizable=0;points=[];autosize=1;align=left;verticalAlign=top;spacingTop=-4;" parent="1" vertex="1">
           <mxGeometry x="155" y="270" width="50" height="20" as="geometry"/>
