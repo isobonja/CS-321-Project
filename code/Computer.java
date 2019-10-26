@@ -1,13 +1,10 @@
-// Computer class
 
-public class Computer extends Player{
-   
-   public Computer(){
-      super();
-   }
-   
-   public void getCard(){
-   
-   }
+public class Computer extends Player {
+
+	@Override
+	public void getCard(Game g, Player other) {
+		// TODO Auto-generated method stub
+
+	}
 
 }
