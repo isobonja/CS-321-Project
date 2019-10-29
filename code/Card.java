@@ -1,3 +1,9 @@
+/**
+ * A class defining a playing card.
+ *
+ * @version 1.0
+ */
+
 @SuppressWarnings("javadoc")
 public class Card{
 

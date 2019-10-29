@@ -1,17 +1,47 @@
+/**
+ * Class controlling the main game flow
+ *
+ * @version 1.0
+ */
+
 import java.util.*;
 
 @SuppressWarnings("javadoc")
 public class Game{
-
+   
+   /**
+    * The selected theme of the deck
+    */
 	private int theme;
+   
+   /**
+    * True if it is the human player's turn
+    */
 	private boolean isUserTurn;
+   
+   /**
+    * The main card deck
+    */
 	private ArrayList<Card> deck;
+   
+   /**
+    * The user's voice input represented as a string
+    */
 	private String input;
+   
+   /**
+    * The user
+    */
 	private User user;
+   
+   /**
+    * The computer
+    */
 	private Computer cp;
 
-	//theme from MainMenu class
+	
 	public Game(int theme){
+      //theme is from MainMenu class
 		this.theme = theme;
 		this.deck = new ArrayList<>();
 		this.isUserTurn = true;
@@ -35,8 +65,12 @@ public class Game{
 		gameLoop();
 	}
 
-	//called from Game constructor 
-	private boolean gameLoop(){
+	/**
+    * Loops for each turn of the game
+    * If a player's hand is empty or the deck is empty, then
+    * the game is over
+    */ 
+	private void gameLoop(){
 		while (user.getSizeHand() != 0 && cp.getSizeHand()!= 0 && deck.size() != 0) 
 		{
 			//game loop
@@ -60,6 +94,11 @@ public class Game{
 		//ending
 	}
 
+   /**
+    * Returns the deck
+    *
+    * @return deck
+    */
 	public ArrayList<Card> getDeck(){
 		return this.deck;
 	}
