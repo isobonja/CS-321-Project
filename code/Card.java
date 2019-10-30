@@ -15,4 +15,14 @@ public class Card{
 		this.theme = theme;
 		this.value = value;
 	}
+   
+   /**
+    * Returns the card value
+    *
+    * @return value
+    */
+   public int getValue(){
+      return this.value;
+   }
+   
 }
