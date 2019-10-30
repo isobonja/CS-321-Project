@@ -8,40 +8,40 @@ import java.util.*;
 
 @SuppressWarnings("javadoc")
 public class Game{
-   
-   /**
-    * The selected theme of the deck
-    */
+
+	/**
+	 * The selected theme of the deck
+	 */
 	private int theme;
-   
-   /**
-    * True if it is the human player's turn
-    */
+
+	/**
+	 * True if it is the human player's turn
+	 */
 	private boolean isUserTurn;
-   
-   /**
-    * The main card deck
-    */
+
+	/**
+	 * The main card deck
+	 */
 	private ArrayList<Card> deck;
-   
-   /**
-    * The user's voice input represented as a string
-    */
+
+	/**
+	 * The user's voice input represented as a string
+	 */
 	private String input;
-   
-   /**
-    * The user
-    */
+
+	/**
+	 * The user
+	 */
 	private User user;
-   
-   /**
-    * The computer
-    */
+
+	/**
+	 * The computer
+	 */
 	private Computer cp;
 
-	
+
 	public Game(int theme){
-      //theme is from MainMenu class
+		//theme is from MainMenu class
 		this.theme = theme;
 		this.deck = new ArrayList<>();
 		this.isUserTurn = true;
@@ -66,11 +66,11 @@ public class Game{
 	}
 
 	/**
-    * Loops for each turn of the game
-    * If a player's hand is empty or the deck is empty, then
-    * the game is over
-    */ 
-	private void gameLoop(){
+	 * Loops for each turn of the game
+	 * If a player's hand is empty or the deck is empty, then
+	 * the game is over
+	 */ 
+	private boolean gameLoop(){
 		while (user.getSizeHand() != 0 && cp.getSizeHand()!= 0 && deck.size() != 0) 
 		{
 			//game loop
@@ -82,7 +82,6 @@ public class Game{
 				//comp turn
 				cp.getCard(this, user);
 				cp.checkPairs();
-
 			}
 		}
 		if(user.getScore()>=cp.getScore()) {
@@ -94,12 +93,13 @@ public class Game{
 		//ending
 	}
 
-   /**
-    * Returns the deck
-    *
-    * @return deck
-    */
+	/**
+	 * Returns the deck
+	 *
+	 * @return deck
+	 */
 	public ArrayList<Card> getDeck(){
 		return this.deck;
 	}
 }
+
