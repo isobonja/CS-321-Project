@@ -12,10 +12,33 @@ public class Computer extends Player {
     * @param g The Game object
     * @param other the human player
     */
-	@Override
+	
 	public void getCard(Game g, Player other) {
 		// TODO Auto-generated method stub
+      boolean found = false;
+      //System.out.println("Computer choosing a card to ask for");
+      int rand = (int)(Math.random()*this.getSizeHand());
+      System.out.println("Computer chose " + (this.hand.get(rand).getValue()));
+      for(int i = 0; i < other.getSizeHand(); i++){
+         System.out.println("" + this.hand.get(rand).getValue() + "\t" + other.getHand().get(i).getValue());
+         if(this.hand.get(rand).getValue() == other.getHand().get(i).getValue()){
+            System.out.println("Computer's choice is in your hand!");
+            this.hand.add(other.getHand().remove(i));
+            found = true;
+         }
+      }
+      
+      if(!found){
+         System.out.println("Computer's choice is not in your hand!");
+         this.goFish(g);
+         g.setTurn(true);
+      }
+      
 
 	}
+   
+   public String printHand(){
+      return this.hand.toString() + "<--";
+   }
 
 }

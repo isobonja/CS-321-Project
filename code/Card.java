@@ -25,4 +25,8 @@ public class Card{
       return this.value;
    }
    
+   public String toString(){
+      return "" + value;
+   }
+   
 }

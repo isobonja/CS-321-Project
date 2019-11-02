@@ -7,7 +7,7 @@
 import java.util.*;
 
 @SuppressWarnings("javadoc")
-public abstract class Player{
+public class Player{
 
 	/**
 	 * A player's score
@@ -17,7 +17,7 @@ public abstract class Player{
 	/**
 	 * The player's cards
 	 */
-	private ArrayList<Card> hand;
+	protected ArrayList<Card> hand;
 
 	public Player(){
 		score = 0;
@@ -33,6 +33,10 @@ public abstract class Player{
 	{
 		return hand.size();
 	}
+   
+   public ArrayList<Card> getHand(){
+      return hand;
+   }
 
 	/**
 	 * Draws a card from the main deck and adds it to the
@@ -42,16 +46,10 @@ public abstract class Player{
 	 */
 	public void goFish(Game g){
 		int x = (int) (Math.random() * (g.getDeck().size()));
-		this.hand.add(g.getDeck().remove(x));
+		Card c = g.getDeck().remove(x);
+      System.out.println("GO FISH! Drew a " + c.getValue());
+      this.hand.add(c);
 	}
-
-	/**
-	 * Abstract class for getting a card from another player
-	 *
-	 * @param g the Game
-	 * @param other the other player
-	 */
-	public abstract void getCard(Game g, Player other);
 
 	/**
 	 * Returns the player's score
@@ -70,21 +68,49 @@ public abstract class Player{
 	 */
 	public void checkPairs()
 	{
-		HashMap<Card, Integer> pairs = new HashMap<>();
+		HashMap<Integer, Integer> pairs = new HashMap<>();
 
 		//construct for loop
 		for (int i = 0; i < getSizeHand(); i++){
-			if (pairs.containsKey(hand.get(i))){
-				pairs.put(hand.get(i), pairs.get(hand.get(i)) +1);
+			if (pairs.containsKey(hand.get(i).getValue())){
+				pairs.put(hand.get(i).getValue(), pairs.get(hand.get(i).getValue()) +1);
 			}
 			else{
-				pairs.put(hand.get(i),1);
+				pairs.put(hand.get(i).getValue(),1);
 			}
 		}
-
+      
+      //System.out.println(pairs);
+      
+      if(pairs.containsValue(2) || pairs.containsValue(3) || pairs.containsValue(4)){
+         for(int k:pairs.keySet()){
+            if(pairs.get(k) >= 2){
+               int ct = 0;
+               int ctMax = 0;
+               if(pairs.get(k)%2 == 0){
+                  ctMax = pairs.get(k);
+               }else{
+                  ctMax = pairs.get(k)-1;
+               }
+               score += pairs.get(k)/2;
+               for(int i = 0; i < this.getSizeHand() && ct < ctMax; i++){
+                  if(this.hand.get(i).getValue() == k){
+                     this.hand.remove(i);
+                     ct++;
+                     i--;
+                  }
+               }
+            }
+         }
+      }
+      
+      //System.out.println("PAIR MADE!");
+      
+      
+      /*
 		ArrayList<Card> duplicateCards = new ArrayList<Card>();
 		//loop over hashmap and check which cards are divisble by %2 and then increment score by /2 and adds cards that satisfy condition to list of duplicate cards
-		for (Map.Entry<Card, Integer> entry : pairs.entrySet()){
+		for (Map.Entry<Integer, Integer> entry : pairs.entrySet()){
 			if (entry.getValue() % 2 == 0){
 				this.score += entry.getValue() / 2;
 				duplicateCards.add(entry.getKey());
@@ -92,6 +118,6 @@ public abstract class Player{
 		}
 
 		//removes all occurences of the duplicated card from the current hand
-		this.hand.removeAll(duplicateCards);
+		this.hand.removeAll(duplicateCards);*/
 	}
 }
