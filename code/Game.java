@@ -38,6 +38,8 @@ public class Game{
 	 * The computer
 	 */
 	private Computer cp;
+   
+   private Scanner in;
 
 
 	public Game(int theme){
@@ -45,10 +47,11 @@ public class Game{
 		this.theme = theme;
 		this.deck = new ArrayList<>();
 		this.isUserTurn = true;
+      this.in = new Scanner(System.in);
 
 		//creates deck of 52 cards
 		for (int i=1; i<=52; i++){
-			Card c = new Card(this.theme, i%13);
+			Card c = new Card(this.theme, (i%13)+1);
 			this.deck.add(c);
 		}
 
@@ -70,26 +73,43 @@ public class Game{
 	 * If a player's hand is empty or the deck is empty, then
 	 * the game is over
 	 */ 
-	private boolean gameLoop(){
+	private void gameLoop(){
+      cp.checkPairs();
+      user.checkPairs();
+      
 		while (user.getSizeHand() != 0 && cp.getSizeHand()!= 0 && deck.size() != 0) 
 		{
+         System.out.println("CP SCORE: " + cp.getScore() + "\tUSER SCORE: " + user.getScore() + "\tCARDS IN DECK: " + deck.size());
+         //System.out.println("test");
+         System.out.println(cp.getHand());
+         //System.out.println(cp.getSizeHand());
+         System.out.println(user.getHand());
+         //System.out.println(user.getSizeHand());
 			//game loop
 			if(isUserTurn){
+            System.out.println("User's turn:\n");
 				//user turn
-				user.getCard(this, cp);
+            System.out.print("Enter the value you would like to ask for: ");
+            int value = in.nextInt();
+				user.getCard(this, cp, value);
 				user.checkPairs();
 			}else{
 				//comp turn
+            System.out.println("Computer's turn:\n");
 				cp.getCard(this, user);
 				cp.checkPairs();
 			}
 		}
-		if(user.getScore()>=cp.getScore()) {
-			return true;
-		}
-		else {
-			return false;
-		}
+      
+      System.out.println("User score: " + user.getScore() + "     Computer score: " + cp.getScore());
+      
+		if(user.getScore()>cp.getScore()) {
+			System.out.println("You win!");
+		}else if(cp.getScore()>user.getScore()){
+			System.out.println("Computer wins!");
+		}else{
+         System.out.println("Tie!");
+      }
 		//ending
 	}
 
@@ -101,5 +121,13 @@ public class Game{
 	public ArrayList<Card> getDeck(){
 		return this.deck;
 	}
+   
+   public void setTurn(boolean b){
+      this.isUserTurn = b;
+   }
+   
+   public static void main(String[] args){
+      new Game(0);
+   }
 }
 
