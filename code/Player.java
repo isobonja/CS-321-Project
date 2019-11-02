@@ -70,7 +70,7 @@ public class Player{
 	{
 		HashMap<Integer, Integer> pairs = new HashMap<>();
 
-		//construct for loop
+		//adds values of cards into hashmap
 		for (int i = 0; i < getSizeHand(); i++){
 			if (pairs.containsKey(hand.get(i).getValue())){
 				pairs.put(hand.get(i).getValue(), pairs.get(hand.get(i).getValue()) +1);
@@ -82,17 +82,21 @@ public class Player{
       
       //System.out.println(pairs);
       
+      //checks if there is more than one of a card value in the player's hand
       if(pairs.containsValue(2) || pairs.containsValue(3) || pairs.containsValue(4)){
          for(int k:pairs.keySet()){
+            //checks if the card value k is present twice or more
             if(pairs.get(k) >= 2){
                int ct = 0;
                int ctMax = 0;
+               //2 if num equal card values is 2 or 3 and 4 if num equal card values is 4
                if(pairs.get(k)%2 == 0){
                   ctMax = pairs.get(k);
                }else{
                   ctMax = pairs.get(k)-1;
                }
                score += pairs.get(k)/2;
+               //finds and removes the cards of equal values in the hand
                for(int i = 0; i < this.getSizeHand() && ct < ctMax; i++){
                   if(this.hand.get(i).getValue() == k){
                      this.hand.remove(i);

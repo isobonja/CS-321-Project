@@ -91,6 +91,9 @@ public class Game{
 				//user turn
             System.out.print("Enter the value you would like to ask for: ");
             int value = in.nextInt();
+            
+            //*** Limit player's value choice to between 1 and 13 ***
+            
 				user.getCard(this, cp, value);
 				user.checkPairs();
 			}else{
