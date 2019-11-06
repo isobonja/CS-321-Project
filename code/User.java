@@ -12,9 +12,7 @@ public class User extends Player {
     * @param g The Game object
     * @param other the Computer player
     */
-	
 	public void getCard(Game g, Player other, int value) {
-		// TODO Auto-generated method stub
       System.out.println("Checking for card in opponent's hand");
       boolean found = false;
       for(int i = 0; i < other.getSizeHand(); i++){
@@ -25,15 +23,11 @@ public class User extends Player {
          }
       }
       
+      //card is not in computer's hand
       if(!found){
          System.out.println("Card not in opponent's hand");
          this.goFish(g);
          g.setTurn(false);
       }
 	}
-   
-   public String printHand(){
-      return this.hand.toString();
-   }
-
 }

@@ -12,9 +12,7 @@ public class Computer extends Player {
     * @param g The Game object
     * @param other the human player
     */
-	
 	public void getCard(Game g, Player other) {
-		// TODO Auto-generated method stub
       boolean found = false;
       //System.out.println("Computer choosing a card to ask for");
       int rand = (int)(Math.random()*this.getSizeHand());
@@ -28,6 +26,7 @@ public class Computer extends Player {
          }
       }
       
+      //case for when the card the computer selected is not in the user's hand
       if(!found){
          System.out.println("Computer's choice is not in your hand!");
          this.goFish(g);
@@ -36,9 +35,5 @@ public class Computer extends Player {
       
 
 	}
-   
-   public String printHand(){
-      return this.hand.toString() + "<--";
-   }
 
 }

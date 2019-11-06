@@ -34,6 +34,11 @@ public class Player{
 		return hand.size();
 	}
    
+   /**
+    * Returns the player's hand
+    *
+    * @return player's hand
+    */
    public ArrayList<Card> getHand(){
       return hand;
    }
@@ -110,7 +115,7 @@ public class Player{
       
       //System.out.println("PAIR MADE!");
       
-      
+      //*************************DEFUNCT*****************************
       /*
 		ArrayList<Card> duplicateCards = new ArrayList<Card>();
 		//loop over hashmap and check which cards are divisble by %2 and then increment score by /2 and adds cards that satisfy condition to list of duplicate cards

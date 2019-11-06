@@ -7,8 +7,19 @@
 @SuppressWarnings("javadoc")
 public class Card{
 
+   /**
+    * A value between 1 and 13 representing the card
+    */
 	private int value;
+   
+   /**
+    * The theme of the card deck
+    */
 	private int theme;
+   
+   /**
+    * THe image associated with the card value
+    */
 	private String image;
 
 	public Card(int theme, int value){

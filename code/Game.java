@@ -76,7 +76,8 @@ public class Game{
 	private void gameLoop(){
 		cp.checkPairs();
 		user.checkPairs();
-
+      
+      //game continues while the user hand, the computer hand, and the deck all are not empty
 		while (user.getSizeHand() != 0 && cp.getSizeHand()!= 0 && deck.size() != 0) 
 		{
 			System.out.println("CP SCORE: " + cp.getScore() + "\tUSER SCORE: " + user.getScore() + "\tCARDS IN DECK: " + deck.size());
@@ -85,10 +86,8 @@ public class Game{
 			//System.out.println(cp.getSizeHand());
 			System.out.println("USER HAND: " + user.getHand());
 			//System.out.println(user.getSizeHand());
-			//game loop
 			if(isUserTurn){
 				System.out.println("User's turn:\n");
-				//user turn
 				System.out.print("Enter the value you would like to ask for: ");
 				int value = in.nextInt();
 				
@@ -97,17 +96,17 @@ public class Game{
 					currentUserCards.add(user.getHand().get(i).getValue());
 				}
 				
-				//*** make sure player is asking for a card that they have
+				//make sure player is asking for a card that they have
 				while (currentUserCards.contains(value) == false) {
 					System.out.println("\nPlese ask for card you already havve in your own deck!");
 					System.out.print("Enter the value you would like to ask for: ");
 					value = in.nextInt();
 				}
 				
-				//*** Limit player's value choice to between 1 and 13 *** 
-				//Ahmad note: not sure we need this check once we check that the user is only asking for cards they have
-
+				//checks if the card the user selected is in the computer's hand
 				user.getCard(this, cp, value);
+            
+            //checks for pairs in the user's hand
 				user.checkPairs();
 			}else{
 				//comp turn
@@ -119,6 +118,7 @@ public class Game{
 
 		System.out.println("User score: " + user.getScore() + "     Computer score: " + cp.getScore());
 
+      //end of game
 		if(user.getScore()>cp.getScore()) {
 			System.out.println("You win!");
 		}else if(cp.getScore()>user.getScore()){
@@ -126,7 +126,6 @@ public class Game{
 		}else{
 			System.out.println("Tie!");
 		}
-		//ending
 	}
 
 	/**
@@ -137,7 +136,12 @@ public class Game{
 	public ArrayList<Card> getDeck(){
 		return this.deck;
 	}
-
+   
+   /**
+    * Changes whose turn it currently is
+    *
+    * @param b true if it is user's turn and false if it is computer's turn
+    */
 	public void setTurn(boolean b){
 		this.isUserTurn = b;
 	}
