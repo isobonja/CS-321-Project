@@ -25,10 +25,13 @@ public class MainActivity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_LOW_PROFILE
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-
         getWindow().getDecorView().setSystemUiVisibility(mUIFlag);
     }
 
+    public void clickButton(View view){
+        Toast.makeText(this, "Please only use the Microphone's voice recognition capabiltiy", Toast.LENGTH_SHORT).show();
+    }
+    
     public void getSpeechInput(View view){
 
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
@@ -50,6 +53,17 @@ public class MainActivity extends AppCompatActivity {
             case 10:
                 if (resultCode == RESULT_OK && data != null) {
                     ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    String userInput = result.get(0);
+                    userInput = userInput.toLowerCase();
+                    if (userInput.contains("start") && !(userInput.contains("how to play"))){
+                        setContentView(R.layout.start_page);
+                    }
+                    else if (userInput.contains("how to play") && !(userInput.contains("start"))){
+                        Toast.makeText(this, "HOW TO PLAY ACTIVITY ACTIVITY NOT YET MADE", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Toast.makeText(this, "Please either say 'Start' or 'How To Play'", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 break;
         }
