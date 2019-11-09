@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#747BC6BE"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:onClick="full_screen">
 
     <Button
         android:id="@+id/startGame2"
@@ -48,10 +48,10 @@
         android:ems="10"
         android:inputType="textPersonName|textCapSentences"
         android:text="HANDS FREE GO FISH!"
+        android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="#000000"
         android:textSize="40sp"
-        android:textAlignment="center"
         android:textStyle="normal"
         android:typeface="normal"
         app:fontFamily="@font/anton"
