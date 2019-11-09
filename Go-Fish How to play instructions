@@ -1,0 +1,14 @@
+
+Go-Fish how to play instructions
+
+This is a Go-Fish game that you play using your voice.
+
+The goal of the game is to win with more pair of cards than the computer. A pair of cards is 2 of the same cards.
+Each player starts with 7 cards. If there is a pair, the pair is removed and a point is added to your score.
+When it is your turn, click the microphone on the bottom right and ask the computer for a card in your hand. For example, "Do you have a one?"
+If the computer has the card, it will give it to you, you get a point, and you can go again.
+If the computer does not have the card, it will say "Go-Fish".
+The game will pick up a card from the deck and give it to you, and it is now the computer's turn to ask for a card.
+The game ends when a player does not have anymore cards in their hand or the deck is empty, and the player with the higher score wins.
+
+To go back to the main menu, click the microphone on the bottom right and say "Back"
