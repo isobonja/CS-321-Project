@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".GameStartActivity">
+
+    <TextView
+        android:id="@+id/ComputerTextView"
+        android:layout_width="180dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="128dp"
+        android:text="Computer :"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/UserTextView"
+        android:layout_width="84dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="232dp"
+        android:text="You :"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/userScoreTextView"
+        android:layout_width="83dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="232dp"
+        android:text="0"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.186"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/computerScoreTextView"
+        android:layout_width="83dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="128dp"
+        android:text="0"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.341"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/DeckTextView"
+        android:layout_width="85dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="104dp"
+        android:text="Deck"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.93"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/DisplayTurnTextView"
+        android:layout_width="168dp"
+        android:layout_height="49dp"
+        android:text="Your Turn"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ComputerCardImage1"
+        android:layout_width="90dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/deck_of_cards" />
+
+    <ImageView
+        android:id="@+id/DeckImage"
+        android:layout_width="90dp"
+        android:layout_height="96dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.498"
+        app:srcCompat="@drawable/deck_of_cards" />
+
+    <ImageView
+        android:id="@+id/computerCardImage2"
+        android:layout_width="90dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginLeft="52dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/deck_of_cards" />
+
+    <ImageView
+        android:id="@+id/computerCardImage3"
+        android:layout_width="90dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginLeft="88dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/deck_of_cards" />
+
+    <ImageView
+        android:id="@+id/computerCardImage4"
+        android:layout_width="90dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="124dp"
+        android:layout_marginLeft="124dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/deck_of_cards" />
+
+    <ImageView
+        android:id="@+id/computerCardImage5"
+        android:layout_width="90dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginLeft="160dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/deck_of_cards" />
+
+    <ImageView
+        android:id="@+id/computerCardImage6"
+        android:layout_width="90dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="196dp"
+        android:layout_marginLeft="196dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/deck_of_cards" />
+
+    <ImageView
+        android:id="@+id/computerCardImage7"
+        android:layout_width="90dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="236dp"
+        android:layout_marginLeft="236dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/deck_of_cards" />
+
+    <ImageView
+        android:id="@+id/computerCardImage8"
+        android:layout_width="90dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="272dp"
+        android:layout_marginLeft="272dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/deck_of_cards" />
+
+    <ImageView
+        android:id="@+id/computerCardImage9"
+        android:layout_width="90dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="304dp"
+        android:layout_marginLeft="304dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/deck_of_cards" />
+
+    <ImageView
+        android:id="@+id/computerCardImage10"
+        android:layout_width="90dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="340dp"
+        android:layout_marginLeft="340dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/deck_of_cards" />
+
+    <ImageView
+        android:id="@+id/computerCardImage11"
+        android:layout_width="90dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="376dp"
+        android:layout_marginLeft="376dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/deck_of_cards" />
+
+    <ImageView
+        android:id="@+id/computerCardImage12"
+        android:layout_width="90dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="412dp"
+        android:layout_marginLeft="412dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/deck_of_cards" />
+
+    <ImageView
+        android:id="@+id/computerCardImage13"
+        android:layout_width="90dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="448dp"
+        android:layout_marginLeft="448dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/deck_of_cards" />
+
+    <ImageView
+        android:id="@+id/userCardImage1"
+        android:layout_width="90dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/playing_card_blank" />
+
+    <ImageView
+        android:id="@+id/userCardImage2"
+        android:layout_width="90dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginLeft="52dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/playing_card_blank" />
+
+    <ImageView
+        android:id="@+id/userCardImage3"
+        android:layout_width="90dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginLeft="88dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/playing_card_blank" />
+
+    <ImageView
+        android:id="@+id/userCardImage4"
+        android:layout_width="90dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="124dp"
+        android:layout_marginLeft="124dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/playing_card_blank" />
+
+    <ImageView
+        android:id="@+id/userCardImage5"
+        android:layout_width="90dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginLeft="160dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/playing_card_blank" />
+
+    <ImageView
+        android:id="@+id/userCardImage6"
+        android:layout_width="90dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="196dp"
+        android:layout_marginLeft="196dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/playing_card_blank" />
+
+    <ImageView
+        android:id="@+id/userCardImage7"
+        android:layout_width="90dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="236dp"
+        android:layout_marginLeft="236dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/playing_card_blank" />
+
+    <ImageView
+        android:id="@+id/userCardImage8"
+        android:layout_width="90dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="272dp"
+        android:layout_marginLeft="272dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/playing_card_blank" />
+
+    <ImageView
+        android:id="@+id/userCardImage9"
+        android:layout_width="90dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="304dp"
+        android:layout_marginLeft="304dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/playing_card_blank" />
+
+    <ImageView
+        android:id="@+id/userCardImage10"
+        android:layout_width="90dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="340dp"
+        android:layout_marginLeft="340dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/playing_card_blank" />
+
+    <ImageView
+        android:id="@+id/userCardImage11"
+        android:layout_width="90dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="376dp"
+        android:layout_marginLeft="376dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/playing_card_blank" />
+
+    <ImageView
+        android:id="@+id/userCardImage12"
+        android:layout_width="90dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="412dp"
+        android:layout_marginLeft="412dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/playing_card_blank" />
+
+    <ImageView
+        android:id="@+id/userCardImage13"
+        android:layout_width="90dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="448dp"
+        android:layout_marginLeft="448dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/playing_card_blank" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
