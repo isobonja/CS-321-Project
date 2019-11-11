@@ -146,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                 }
+                break;
 
             case 13:
                 if (resultCode == RESULT_OK && data != null) {
