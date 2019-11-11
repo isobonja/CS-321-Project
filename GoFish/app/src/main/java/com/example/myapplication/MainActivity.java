@@ -84,6 +84,19 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void getSpeechInputInGame(View view){
+
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(intent, 13);
+        } else {
+            Toast.makeText(this, "Your Device Doesn't Support Speech Input", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -124,16 +137,29 @@ public class MainActivity extends AppCompatActivity {
                     ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     String userInput = result.get(0);
                     userInput = userInput.toLowerCase();
-                    if (userInput.contains("back") ){
+                    if (userInput.contains("back")) {
                         setContentView(R.layout.activity_main);
+                    } else if(userInput.contains("original")) {
+                        setContentView(R.layout.activity_game_start);
+                    } else {
+                        Toast.makeText(this, "Say 'Back' to  go back to the main menu", Toast.LENGTH_LONG).show();
                     }
-                    else{
+
+                }
+
+            case 13:
+                if (resultCode == RESULT_OK && data != null) {
+                    ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    String userInput = result.get(0);
+                    userInput = userInput.toLowerCase();
+                    if (userInput.contains("back")) {
+                        setContentView(R.layout.start_page);
+                    } else {
                         Toast.makeText(this, "Say 'Back' to  go back to the main menu", Toast.LENGTH_LONG).show();
                     }
 
                 }
                 break;
-
         }
     }
 }

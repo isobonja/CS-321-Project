@@ -379,4 +379,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/playing_card_blank" />
 
+    <ImageView
+        android:id="@+id/mic"
+        android:layout_width="76dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="24dp"
+        android:onClick="getSpeechInputInGame"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@android:drawable/ic_btn_speak_now" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
