@@ -31,7 +31,7 @@
 
   o	Another main component to this game is that we would extend the applicability of the game to different themes by including kids categories as well (main themes: original game, animals, fruits, & colors)
 
-    >	The specific themes may be subject to change but we all agree that in the long run this app should have 1 original theme and 3 themes designated for kids
+  o	The specific themes may be subject to change but we all agree that in the long run this app should have 1 original theme and 3 themes designated for kids
 
 •	Value
 
