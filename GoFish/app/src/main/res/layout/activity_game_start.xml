@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".GameStartActivity">
+    tools:context=".GameStartActivity"
+    android:onClick="full_screen">
 
     <TextView
         android:id="@+id/ComputerTextView"
