@@ -9,8 +9,17 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Scanner;
 
 public class GameStartActivity extends AppCompatActivity {
+
+    protected String userInput;
+    private int theme;
+    private ArrayList<Card> deck;
+    private boolean isUserTurn;
+    private User user;
+    private Computer cp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +45,8 @@ public class GameStartActivity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
 
         getWindow().getDecorView().setSystemUiVisibility(mUIFlag);
+
+
     }
 
     public void getSpeechInputInGame(View view){
@@ -59,7 +70,7 @@ public class GameStartActivity extends AppCompatActivity {
             case 13:
                 if (resultCode == RESULT_OK && data != null) {
                     ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                    String userInput = result.get(0);
+                    userInput = result.get(0);
                     userInput = userInput.toLowerCase();
                     if (userInput.contains("exit") ){
                         this.finish();
@@ -72,4 +83,23 @@ public class GameStartActivity extends AppCompatActivity {
         }
     }
 
+    private void originalConversion(){
+
+    }
+
+    private void animalsConversion(){
+
+    }
+
+    private void colorsConversion(){
+
+    }
+
+    private void fruitsConversion(){
+
+    }
+
+    public void setTurn(boolean b){
+        this.isUserTurn = b;
+    }
 }
