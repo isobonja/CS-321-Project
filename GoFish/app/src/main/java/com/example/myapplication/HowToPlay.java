@@ -51,4 +51,26 @@ public class HowToPlay extends AppCompatActivity{
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case 12:
+                if (resultCode == RESULT_OK && data != null) {
+                    ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    String userInput = result.get(0);
+                    userInput = userInput.toLowerCase();
+                    if (userInput.contains("back") ){
+                        //setContentView(R.layout.activity_main);
+                        this.finish();
+                    }
+                    else{
+                        Toast.makeText(this, "Say 'Back' to  go back to the main menu", Toast.LENGTH_LONG).show();
+                    }
+                }
+                break;
+        }
+    }
+
 }

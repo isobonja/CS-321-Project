@@ -53,8 +53,6 @@ public class StartPageController extends AppCompatActivity{
         }
     }
 
-    /*
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -68,11 +66,15 @@ public class StartPageController extends AppCompatActivity{
                     if (userInput.contains("back") ){
                         this.finish();
                     }
+                    if (userInput.contains("original")){
+                        startActivity(new Intent(StartPageController.this, GameStartActivity.class));
+                    }
 
+                    else{
+                        Toast.makeText(this, "Say 'Back' to go back to the main menu or select a theme", Toast.LENGTH_LONG).show();
+                    }
                 }
                 break;
         }
     }
-
-     */
 }
