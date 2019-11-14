@@ -1,0 +1,115 @@
+    public static Integer validOriginal(String userInput){
+        Integer value = 0;
+        if (userInput.contains("ace")){
+            return 1;
+        }
+        else if (userInput.contains("2") || userInput.contains("two")){
+            return 2;
+        }
+        else if (userInput.contians("3") || userInput.contains("three")){
+            return 3;
+        }
+        else if (userInput.contians("4") || userInput.contains("four")){
+            return 4;
+        }
+        else if (userInput.contians("5") || userInput.contains("five")){
+            return 5;
+        }
+        else if (userInput.contians("6") || userInput.contains("six")){
+            return 6;
+        }
+        else if (userInput.contians("7") || userInput.contains("seven")){
+            return 7;
+        }
+        else if (userInput.contians("8") || userInput.contains("eight")){
+            return 8;
+        }
+        else if (userInput.contians("9") || userInput.contains("nine")){
+            return 9;
+        }
+        else if (userInput.contians("10") || userInput.contains("ten")){
+            return 10;
+        }
+        else if (userInput.contians("jack")){
+            return 11;
+        }
+        else if (userInput.contians("queen")){
+            return 12;
+        }
+        else if (userInput.contians("king")){
+            return 13;
+        }
+        else{
+            return value;
+        }
+    }
+
+    public boolean checkIfUserHasCard(Integer value){
+        User user = this.g.user;
+        ArrayList<Integer> currentUserCards = new ArrayList<>();
+        for(int i = 0; i < user.getHand().size(); i++) {
+            currentUserCards.add(user.getHand().get(i).getValue());
+        }
+
+        if (currentUserCards.contains(value) == false){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    public boolean checkIfGameOver(){
+        if(this.g.user.getSizeHand() == 0 || this.g.cp.getSizeHand()== 0 || this.g.deck.size() == 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case 13:
+                if (resultCode == RESULT_OK && data != null) {
+                    ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    userInput = result.get(0);
+                    userInput = userInput.toLowerCase();
+
+                    if (userInput.contains("exit") ){
+                        this.finish();
+                    }
+                    else if(userInput.contains("do you have")) {
+                        int value = validOriginal(userInput);
+                        boolean hasCard = checkIfUserHasCard(this.g.user, value);
+                        if (value == 0){
+                            Toast.makeText(this, "Please ask in the following format: 'Do you have a nine?'", Toast.LENGTH_LONG).show();
+                        }
+                        else if(hasCard == false){
+                            Toast.makeText(this, "Please only ask for cards in your hand!'", Toast.LENGTH_LONG).show();
+                        }
+                        else{
+                            this.g.user.getCard(this.g, cp, value);
+                            this.g.user.checkPairs();
+
+                            if (checkIfGameOver()){
+                                //FIXME
+                            }
+                            this.g.cp.getCard(this, user);
+                            this.g.cp.checkPairs();
+
+                            if (checkIfGameOver()){
+                                //FIXME
+                            }
+                        }
+                    }
+                    else{
+                        Toast.makeText(this, "Please ask for a card you have or say 'Exit' to exit the game", Toast.LENGTH_LONG).show();
+                    }
+                }
+                break;
+        }
+    }
