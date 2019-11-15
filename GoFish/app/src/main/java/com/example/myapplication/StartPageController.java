@@ -12,6 +12,8 @@ import java.util.Locale;
 
 public class StartPageController extends AppCompatActivity{
 
+    public static final String THEME = "com.example.myapplication.THEME";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +41,6 @@ public class StartPageController extends AppCompatActivity{
         getWindow().getDecorView().setSystemUiVisibility(mUIFlag);
     }
 
-
     public void getSpeechInputTwo(View view){
 
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
@@ -66,10 +67,16 @@ public class StartPageController extends AppCompatActivity{
                     if (userInput.contains("back") ){
                         this.finish();
                     }
-                    if (userInput.contains("original")){
-                        startActivity(new Intent(StartPageController.this, GameStartActivity.class));
+                    if (userInput.contains("original") && !(userInput.contains("colors") || userInput.contains("animals") || userInput.contains("fruits"))){
+                        Intent originalGame = new Intent(StartPageController.this, GameStartActivity.class);
+                        originalGame.putExtra(THEME,0);
+                        startActivity(originalGame);
                     }
-
+                    else if(userInput.contains("colors")){
+                        Intent originalGame = new Intent(StartPageController.this, GameStartActivity.class);
+                        originalGame.putExtra(THEME,2);
+                        startActivity(originalGame);
+                    }
                     else{
                         Toast.makeText(this, "Say 'Back' to go back to the main menu or select a theme", Toast.LENGTH_LONG).show();
                     }
