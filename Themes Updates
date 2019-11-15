@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -78,10 +79,10 @@ public class GameStartActivity extends AppCompatActivity {
         voice = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int i) {
-                if(i != TextToSpeech.ERROR){
+                if (i != TextToSpeech.ERROR) {
                     voice.setLanguage(Locale.US);
-                    voice.setSpeechRate((float)0.7);
-                    voice.setPitch((float)1.5);
+                    voice.setSpeechRate((float) 0.7);
+                    voice.setPitch((float) 1.5);
                 }
             }
         });
@@ -89,10 +90,10 @@ public class GameStartActivity extends AppCompatActivity {
         voice2 = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int i) {
-                if(i != TextToSpeech.ERROR){
+                if (i != TextToSpeech.ERROR) {
                     voice2.setLanguage(Locale.US);
-                    voice2.setSpeechRate((float)0.7);
-                    voice2.setPitch((float)0.2);
+                    voice2.setSpeechRate((float) 0.7);
+                    voice2.setPitch((float) 0.2);
                 }
             }
         });
@@ -157,13 +158,16 @@ public class GameStartActivity extends AppCompatActivity {
         centerMessage.setText("Turn!");
 
         Intent intent = getIntent();
-        String theme = intent.getStringExtra("theme");
-        this.themeVal = Integer.parseInt(theme);
+        int theme = intent.getIntExtra(StartPageController.THEME, 0);
+
+        this.themeVal = theme;
+        //this.themeVal = Integer.parseInt(theme);
 
         setHandImage(themeVal);
         g.getUser().checkPairs();
         g.getCp().checkPairs();
         setHandImage(themeVal);
+        System.out.println("themeVal: " + themeVal);
     }
 
     public void full_screen(View view) {
@@ -178,6 +182,7 @@ public class GameStartActivity extends AppCompatActivity {
     }
 
     public void setHandImage(int themeVal) {
+        System.out.println("INSIDE SETHANDIMAGE");
         for (int i = 0; i < handImageCp.size(); i++) {
             handImageCp.get(i).setVisibility(View.INVISIBLE);
         }
@@ -190,7 +195,7 @@ public class GameStartActivity extends AppCompatActivity {
             handImageUser.get(i).setVisibility(View.INVISIBLE);
         }
         int val;
-        if (themeVal == 0){
+        if (themeVal == 0) {
             for (int i = 0; i < g.getUserHand().size(); i++) {
                 handImageUser.get(i).setVisibility(View.VISIBLE);
                 val = g.getUserHand().get(i);
@@ -222,43 +227,47 @@ public class GameStartActivity extends AppCompatActivity {
                     handImageUser.get(i).setImageResource(R.drawable.playing_card_13);
                 }
             }
-            if (themeVal == 2){
-                for (int i = 0; i < g.getUserHand().size(); i++) {
-                    handImageUser.get(i).setVisibility(View.VISIBLE);
-                    val = g.getUserHand().get(i);
-                    if (val == 1) {
-                        handImageUser.get(i).setImageResource(R.drawable.color_card_1);
-                    } else if (val == 2) {
-                        handImageUser.get(i).setImageResource(R.drawable.color_card_2);
-                    } else if (val == 3) {
-                        handImageUser.get(i).setImageResource(R.drawable.color_card_3);
-                    } else if (val == 4) {
-                        handImageUser.get(i).setImageResource(R.drawable.color_card_4);
-                    } else if (val == 5) {
-                        handImageUser.get(i).setImageResource(R.drawable.color_card_5);
-                    } else if (val == 6) {
-                        handImageUser.get(i).setImageResource(R.drawable.color_card_6);
-                    } else if (val == 7) {
-                        handImageUser.get(i).setImageResource(R.drawable.color_card_7);
-                    } else if (val == 8) {
-                        handImageUser.get(i).setImageResource(R.drawable.color_card_8);
-                    } else if (val == 9) {
-                        handImageUser.get(i).setImageResource(R.drawable.color_card_9);
-                    } else if (val == 10) {
-                        handImageUser.get(i).setImageResource(R.drawable.color_card_10);
-                    } else if (val == 11) {
-                        handImageUser.get(i).setImageResource(R.drawable.color_card_11);
-                    } else if (val == 12) {
-                        handImageUser.get(i).setImageResource(R.drawable.color_card_12);
-                    } else if (val == 13) {
-                        handImageUser.get(i).setImageResource(R.drawable.color_card_13);
-                    }
+        }
+        if (themeVal == 2) {
+            for (int i = 0; i < g.getUserHand().size(); i++) {
+                handImageUser.get(i).setVisibility(View.VISIBLE);
+                val = g.getUserHand().get(i);
+                if (val == 1) {
+                    handImageUser.get(i).setImageResource(R.drawable.color_card_1);
+                } else if (val == 2) {
+                    handImageUser.get(i).setImageResource(R.drawable.color_card_2);
+                } else if (val == 3) {
+                    handImageUser.get(i).setImageResource(R.drawable.color_card_3);
+                } else if (val == 4) {
+                    handImageUser.get(i).setImageResource(R.drawable.color_card_4);
+                } else if (val == 5) {
+                    handImageUser.get(i).setImageResource(R.drawable.color_card_5);
+                } else if (val == 6) {
+                    handImageUser.get(i).setImageResource(R.drawable.color_card_6);
+                } else if (val == 7) {
+                    handImageUser.get(i).setImageResource(R.drawable.color_card_7);
+                } else if (val == 8) {
+                    handImageUser.get(i).setImageResource(R.drawable.color_card_8);
+                } else if (val == 9) {
+                    handImageUser.get(i).setImageResource(R.drawable.color_card_9);
+                } else if (val == 10) {
+                    handImageUser.get(i).setImageResource(R.drawable.color_card_10);
+                } else if (val == 11) {
+                    handImageUser.get(i).setImageResource(R.drawable.color_card_11);
+                } else if (val == 12) {
+                    handImageUser.get(i).setImageResource(R.drawable.color_card_12);
+                } else if (val == 13) {
+                    handImageUser.get(i).setImageResource(R.drawable.color_card_13);
                 }
             }
         }
 
-        userScore.setText("" + g.getUser().getScore());
-        cpScore.setText("" + g.getCp().getScore());
+        userScore.setText("" + g.getUser().
+
+                getScore());
+        cpScore.setText("" + g.getCp().
+
+                getScore());
 
     }
 
@@ -288,7 +297,7 @@ public class GameStartActivity extends AppCompatActivity {
             return 11;
         } else if (userInput.contains("rainbow")) {
             return 12;
-        } else if (userInput.contains("beige") || userInput.contains("tan")){
+        } else if (userInput.contains("beige") || userInput.contains("tan")) {
             return 13;
         } else {
             return 0;
@@ -353,13 +362,13 @@ public class GameStartActivity extends AppCompatActivity {
             if (themeVal == 0) {
                 startActivityForResult(intent, 13);
             }
-            if (themeVal == 1){
+            if (themeVal == 1) {
                 startActivityForResult(intent, 14);
             }
-            if (themeVal == 2){
+            if (themeVal == 2) {
                 startActivityForResult(intent, 15);
             }
-            if (themeVal == 3){
+            if (themeVal == 3) {
                 startActivityForResult(intent, 16);
 
             }
@@ -379,39 +388,35 @@ public class GameStartActivity extends AppCompatActivity {
                     userInput = result.get(0);
                     userInput = userInput.toLowerCase();
 
-                    if (userInput.contains("exit") ){
+                    if (userInput.contains("exit")) {
                         this.finish();
-                    }
-                    else if (userInput.contains("do you have")){
+                    } else if (userInput.contains("do you have")) {
 
                         int value = validOriginal(userInput);
-                        System.out.println("value: "+value);
+                        System.out.println("value: " + value);
                         boolean hasCard = checkIfUserHasCard(value);
-                        if (value == 0){
+                        if (value == 0) {
                             Toast.makeText(this, "Please ask in the following format: 'Do you have a nine?'", Toast.LENGTH_LONG).show();
-                        }
-                        else if(hasCard == false){
+                        } else if (hasCard == false) {
                             Toast.makeText(this, "Please only ask for cards in your hand!'", Toast.LENGTH_LONG).show();
-                        }
-                        else{
+                        } else {
                             try {
                                 Thread.sleep(2000);
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
                             this.g.getUser().getCard(this.g, this.g.getCp(), value);
-                            if (g.getUser().getGoFish()){
+                            if (g.getUser().getGoFish()) {
                                 voice.speak("GO FISH!", TextToSpeech.QUEUE_FLUSH, null);
-                            }
-                            else{
+                            } else {
                                 voice.speak("I have it", TextToSpeech.QUEUE_FLUSH, null);
+
                             }
                             try {
                                 Thread.sleep(1000);
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
-                            voice.stop();
                             setHandImage(themeVal);
                             try {
                                 Thread.sleep(1000);
@@ -426,10 +431,11 @@ public class GameStartActivity extends AppCompatActivity {
                                 e.printStackTrace();
                             }
                             setHandImage(themeVal);
-                            System.out.println("hand size user: "+this.g.getUser().getSizeHand()+"\n hand size cp: "+this.g.getCp().getSizeHand()+
-                                    "\n user score: "+this.g.getUser().getScore()+"\n cp score: "+this.g.getCp().getScore());
+                            //handImageUser.get(g.getUserHand().size()-1).setVisibility(View.VISIBLE);
+                            System.out.println("hand size user: " + this.g.getUser().getSizeHand() + "\n hand size cp: " + this.g.getCp().getSizeHand() +
+                                    "\n user score: " + this.g.getUser().getScore() + "\n cp score: " + this.g.getCp().getScore());
 
-                            if (checkIfGameOver()){
+                            if (checkIfGameOver()) {
                                 //FIXME
                             }
                             try {
@@ -438,7 +444,7 @@ public class GameStartActivity extends AppCompatActivity {
                                 e.printStackTrace();
                             }
 
-                            while(g.getTurn() == false) {
+                            while (g.getTurn() == false) {
                                 voice.speak("My turn", TextToSpeech.QUEUE_FLUSH, null);
                                 try {
                                     Thread.sleep(3000);
@@ -447,13 +453,13 @@ public class GameStartActivity extends AppCompatActivity {
                                 }
 
                                 int c = this.g.getCp().getCard(this.g, this.g.getUser());
-                                voice.speak("I asked for a "+c, TextToSpeech.QUEUE_FLUSH, null);
+                                voice.speak("I asked for a " + c, TextToSpeech.QUEUE_FLUSH, null);
                                 try {
                                     Thread.sleep(2000);
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
-                                if (g.getCp().getGoFish()){
+                                if (g.getCp().getGoFish()) {
                                     voice2.speak("GO FISH!", TextToSpeech.QUEUE_FLUSH, null);
                                 }
                                 this.g.getCp().checkPairs();
@@ -475,13 +481,12 @@ public class GameStartActivity extends AppCompatActivity {
                                 //FIXME
                             }
                         }
-                    }
-                    else{
+                    } else {
                         Toast.makeText(this, "Please ask for a card you have or say 'Exit' to exit the game", Toast.LENGTH_LONG).show();
                     }
                 }
                 break;
-            case 14:
+            case 15:
                 if (resultCode == RESULT_OK && data != null) {
                     ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     userInput = result.get(0);
