@@ -180,6 +180,10 @@ public class Game extends GameStartActivity{
 		this.isUserTurn = b;
 	}
 
+	public boolean getTurn(){
+		return this.isUserTurn;
+	}
+
 	public static void main(String[] args){
 		new Game(0);
 	}

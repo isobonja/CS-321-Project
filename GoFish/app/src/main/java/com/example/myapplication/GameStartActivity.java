@@ -18,11 +18,6 @@ import java.lang.Thread;
 public class GameStartActivity extends AppCompatActivity {
 
     protected String userInput;
-    private int theme;
-    private ArrayList<Card> deck;
-    private boolean isUserTurn;
-    private User user;
-    private Computer cp;
     private Game g;
     ImageView userCardImage1;
     ImageView userCardImage2;
@@ -52,6 +47,7 @@ public class GameStartActivity extends AppCompatActivity {
     ImageView computerCardImage13;
     TextView userScore;
     TextView cpScore;
+    TextView centerMessage;
 
     private ArrayList<ImageView> handImageUser;
     private ArrayList<ImageView> handImageCp;
@@ -127,18 +123,13 @@ public class GameStartActivity extends AppCompatActivity {
         handImageCp.add(computerCardImage13);
         userScore = (TextView)findViewById(R.id.userScore);
         cpScore = (TextView)findViewById(R.id.cpScore);
+        centerMessage = (TextView)findViewById(R.id.centerMessage);
+        centerMessage.setText("Turn!");
 
         setHandImage();
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         g.getUser().checkPairs();
         g.getCp().checkPairs();
         setHandImage();
-        userScore.setText(""+g.getUser().getScore());
-        cpScore.setText(""+g.getCp().getScore());
     }
 
     public void full_screen(View view){
@@ -153,7 +144,6 @@ public class GameStartActivity extends AppCompatActivity {
     }
 
     public void setHandImage (){
-
         for (int i = 0; i < handImageCp.size(); i++){
             handImageCp.get(i).setVisibility(View.INVISIBLE);
         }
@@ -169,7 +159,6 @@ public class GameStartActivity extends AppCompatActivity {
         for (int i = 0; i < g.getUserHand().size(); i++){
             handImageUser.get(i).setVisibility(View.VISIBLE);
             val = g.getUserHand().get(i);
-            System.out.println("Value is "+val);
             //int image = getResources().getIdentifier("playing_card_"+val+".jpg", "drawable-v24", getPackageName());
             //int image = getResources().getIdentifier(getPackageName()+"drawable-v24/playing_card_"+val,null, null);
             //handImageUser.get(i).setImageResource(image);
@@ -213,6 +202,8 @@ public class GameStartActivity extends AppCompatActivity {
                 handImageUser.get(i).setImageResource(R.drawable.playing_card_13);
             }
         }
+        userScore.setText(""+g.getUser().getScore());
+        cpScore.setText(""+g.getCp().getScore());
 
     }
 
@@ -290,8 +281,6 @@ public class GameStartActivity extends AppCompatActivity {
     }
 
     public void getSpeechInputInGame(View view){
-
-
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
@@ -328,14 +317,32 @@ public class GameStartActivity extends AppCompatActivity {
                             Toast.makeText(this, "Please only ask for cards in your hand!'", Toast.LENGTH_LONG).show();
                         }
                         else{
-                            this.g.getUser().getCard(this.g, cp, value);
+                            System.out.println("hand size user: "+this.g.getUser().getSizeHand()+"\n hand size cp: "+this.g.getCp().getSizeHand()+
+                                    "\n user score: "+this.g.getUser().getScore()+"\n cp score: "+this.g.getCp().getScore());
+                            this.g.getUser().getCard(this.g, this.g.getCp(), value);
                             this.g.getUser().checkPairs();
+                            setHandImage();
+                            System.out.println("hand size user: "+this.g.getUser().getSizeHand()+"\n hand size cp: "+this.g.getCp().getSizeHand()+
+                                    "\n user score: "+this.g.getUser().getScore()+"\n cp score: "+this.g.getCp().getScore());
 
                             if (checkIfGameOver()){
                                 //FIXME
                             }
-                            this.g.getCp().getCard(this.g, user);
-                            this.g.getCp().checkPairs();
+
+                            if(g.getTurn() == false) {
+                                centerMessage.setText("Computer Turn");
+
+                                this.g.getCp().getCard(this.g, this.g.getUser());
+                                this.g.getCp().checkPairs();
+
+                                setHandImage();
+                            }
+                            try {
+                                Thread.sleep(5000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            centerMessage.setText("Your Turn");
 
                             if (checkIfGameOver()) {
                                 //FIXME
@@ -366,7 +373,4 @@ public class GameStartActivity extends AppCompatActivity {
 
     }
 
-    public void setTurn(boolean b){
-        this.isUserTurn = b;
-    }
 }
