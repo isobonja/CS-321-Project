@@ -7,6 +7,7 @@ package com.example.myapplication;
  */
  
 public class Computer extends Player {
+   private boolean isGoFish = false;
 
    /**
     * Lets computer get a card from the user
@@ -14,7 +15,8 @@ public class Computer extends Player {
     * @param g The Game object
     * @param other the human player
     */
-	public void getCard(Game g, Player other) {
+	public int getCard(Game g, Player other) {
+	  isGoFish = false;
       boolean found = false;
       //System.out.println("Computer choosing a card to ask for");
       int rand = (int)(Math.random()*this.getSizeHand());
@@ -30,12 +32,16 @@ public class Computer extends Player {
       
       //case for when the card the computer selected is not in the user's hand
       if(!found){
+         isGoFish = true;
          System.out.println("Computer's choice is not in your hand!");
          this.goFish(g);
          g.setTurn(true);
       }
-      
-
+      return this.hand.get(rand).getValue();
 	}
+
+	public boolean getGoFish(){
+	   return isGoFish;
+    }
 
 }

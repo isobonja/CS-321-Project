@@ -5,10 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.speech.RecognizerIntent;
+import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -48,6 +51,8 @@ public class GameStartActivity extends AppCompatActivity {
     TextView userScore;
     TextView cpScore;
     TextView centerMessage;
+    TextToSpeech voice;
+    TextToSpeech voice2;
 
     private ArrayList<ImageView> handImageUser;
     private ArrayList<ImageView> handImageCp;
@@ -67,6 +72,27 @@ public class GameStartActivity extends AppCompatActivity {
         getWindow().getDecorView().setSystemUiVisibility(mUIFlag);
         g = new Game(1);
 
+        voice = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int i) {
+                if(i != TextToSpeech.ERROR){
+                    voice.setLanguage(Locale.US);
+                    voice.setSpeechRate((float)0.7);
+                    voice.setPitch((float)1.5);
+                }
+            }
+        });
+
+        voice2 = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int i) {
+                if(i != TextToSpeech.ERROR){
+                    voice2.setLanguage(Locale.US);
+                    voice2.setSpeechRate((float)0.7);
+                    voice2.setPitch((float)0.2);
+                }
+            }
+        });
         handImageUser = new ArrayList<ImageView>();
         handImageCp = new ArrayList<ImageView>();
         userCardImage1 = (ImageView)findViewById(R.id.userCardImage1);
@@ -307,6 +333,7 @@ public class GameStartActivity extends AppCompatActivity {
                         this.finish();
                     }
                     else if (userInput.contains("do you have")){
+
                         int value = validOriginal(userInput);
                         System.out.println("value: "+value);
                         boolean hasCard = checkIfUserHasCard(value);
@@ -317,10 +344,37 @@ public class GameStartActivity extends AppCompatActivity {
                             Toast.makeText(this, "Please only ask for cards in your hand!'", Toast.LENGTH_LONG).show();
                         }
                         else{
-                            System.out.println("hand size user: "+this.g.getUser().getSizeHand()+"\n hand size cp: "+this.g.getCp().getSizeHand()+
-                                    "\n user score: "+this.g.getUser().getScore()+"\n cp score: "+this.g.getCp().getScore());
+                            try {
+                                Thread.sleep(2000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                             this.g.getUser().getCard(this.g, this.g.getCp(), value);
+                            if (g.getUser().getGoFish()){
+                                voice.speak("GO FISH!", TextToSpeech.QUEUE_FLUSH, null);
+                            }
+                            else{
+                                voice.speak("I have it", TextToSpeech.QUEUE_FLUSH, null);
+                            }
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            voice.stop();
+                            setHandImage();
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+
                             this.g.getUser().checkPairs();
+                            try {
+                                Thread.sleep(2000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                             setHandImage();
                             System.out.println("hand size user: "+this.g.getUser().getSizeHand()+"\n hand size cp: "+this.g.getCp().getSizeHand()+
                                     "\n user score: "+this.g.getUser().getScore()+"\n cp score: "+this.g.getCp().getScore());
@@ -328,21 +382,44 @@ public class GameStartActivity extends AppCompatActivity {
                             if (checkIfGameOver()){
                                 //FIXME
                             }
+                            try {
+                                Thread.sleep(3000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
 
-                            if(g.getTurn() == false) {
-                                centerMessage.setText("Computer Turn");
+                            while(g.getTurn() == false) {
+                                voice.speak("My turn", TextToSpeech.QUEUE_FLUSH, null);
+                                try {
+                                    Thread.sleep(3000);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
 
-                                this.g.getCp().getCard(this.g, this.g.getUser());
+                                int c = this.g.getCp().getCard(this.g, this.g.getUser());
+                                voice.speak("I asked for a "+c, TextToSpeech.QUEUE_FLUSH, null);
+                                try {
+                                    Thread.sleep(2000);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                if (g.getCp().getGoFish()){
+                                    voice2.speak("GO FISH!", TextToSpeech.QUEUE_FLUSH, null);
+                                }
                                 this.g.getCp().checkPairs();
+                                try {
+                                    Thread.sleep(1000);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
 
                                 setHandImage();
                             }
                             try {
-                                Thread.sleep(5000);
+                                Thread.sleep(1000);
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
-                            centerMessage.setText("Your Turn");
 
                             if (checkIfGameOver()) {
                                 //FIXME
