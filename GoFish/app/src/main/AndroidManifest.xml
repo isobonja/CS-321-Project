@@ -23,7 +23,8 @@
         <activity android:name=".HowToPlay" android:screenOrientation="sensorLandscape">
 
         </activity>
-        <activity android:name=".GameStartActivity" android:screenOrientation="sensorLandscape">
+        <activity android:name=".GameStartActivity" android:screenOrientation="sensorLandscape"
+            android:parentActivityName=".StartPageController">
 
         </activity>
 
