@@ -64,14 +64,39 @@ public class Game extends GameStartActivity{
 			user.goFish(this);
 			cp.goFish(this);
 		}
-		gameLoop();
+		//gameLoop();
+	}
+
+	public User getUser(){
+		return this.user;
+	}
+
+	public Computer getCp(){
+		return this.cp;
+	}
+
+	public ArrayList<Integer> getUserHand(){
+		ArrayList<Integer> currentUserCards = new ArrayList<>();
+		for(int i = 0; i < user.getHand().size(); i++) {
+			currentUserCards.add(user.getHand().get(i).getValue());
+		}
+		return currentUserCards;
+	}
+
+	public ArrayList<Integer> getCpHand(){
+		ArrayList<Integer> currentCpCards = new ArrayList<>();
+		for(int i = 0; i < cp.getHand().size(); i++) {
+			currentCpCards.add(cp.getHand().get(i).getValue());
+		}
+		return currentCpCards;
 	}
 
 	/**
 	 * Loops for each turn of the game
 	 * If a player's hand is empty or the deck is empty, then
 	 * the game is over
-	 */ 
+	 */
+
 	private void gameLoop(){
 		cp.checkPairs();
 		user.checkPairs();
@@ -81,14 +106,10 @@ public class Game extends GameStartActivity{
 		{
 			if(isUserTurn){
 				//mic input
-				
-				ArrayList<Integer> currentUserCards = new ArrayList<>();
-				for(int i = 0; i < user.getHand().size(); i++) {
-					currentUserCards.add(user.getHand().get(i).getValue());
-				}
 
 
 
+/*
 				if(userInput.contains("ace")){
 					userInput = "1";
 				}else if(userInput.contains("jack")){
@@ -98,16 +119,26 @@ public class Game extends GameStartActivity{
 				}else if(userInput.contains("king")){
 					userInput = "13";
 				}
+				else{
+					Integer.parseInt(userInput);
+				}
+
+ */
 
 				//make sure player is asking for a card that they have
-				while (Integer.parseInt(userInput)) == null) {
+				/*
+				while ((Integer.parseInt(userInput)) == null) {
 					System.out.println("\nPlese ask for card you already havve in your own deck!");
 					System.out.print("Enter the value you would like to ask for: ");
 
 				}
+
+				 */
 				
 				//checks if the card the user selected is in the computer's hand
-				user.getCard(this, cp, userInput);
+
+				/*Temporarily commented out*/
+				//user.getCard(this, cp, userInput);
             
             //checks for pairs in the user's hand
 				user.checkPairs();
