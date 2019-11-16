@@ -68,14 +68,14 @@ public class StartPageController extends AppCompatActivity{
                         this.finish();
                     }
                     if (userInput.contains("original") && !(userInput.contains("colors") || userInput.contains("animals") || userInput.contains("fruits"))){
-                        Intent originalGame = new Intent(StartPageController.this, GameStartActivity.class);
-                        originalGame.putExtra(THEME,0);
-                        startActivity(originalGame);
+                        Intent startGame0 = new Intent(StartPageController.this, GameStartActivity.class);
+                        startGame0.putExtra(THEME,0);
+                        startActivity(startGame0);
                     }
                     else if(userInput.contains("colors")){
-                        Intent originalGame = new Intent(StartPageController.this, GameStartActivity.class);
-                        originalGame.putExtra(THEME,2);
-                        startActivity(originalGame);
+                        Intent startGame2 = new Intent(StartPageController.this, GameStartActivity.class);
+                        startGame2.putExtra(THEME,2);
+                        startActivity(startGame2);
                     }
                     else{
                         Toast.makeText(this, "Say 'Back' to go back to the main menu or select a theme", Toast.LENGTH_LONG).show();
