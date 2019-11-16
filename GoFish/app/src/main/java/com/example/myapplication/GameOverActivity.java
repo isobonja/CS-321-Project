@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -12,10 +13,14 @@ import java.util.Locale;
 
 public class GameOverActivity extends AppCompatActivity {
 
+    TextView UserScoreNum;
+    TextView CpScoreNum;
+    TextView DisplayWinner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.start_page);
+        setContentView(R.layout.activity_game_over);
 
         int mUIFlag = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
@@ -25,6 +30,27 @@ public class GameOverActivity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
         getWindow().getDecorView().setSystemUiVisibility(mUIFlag);
+
+        UserScoreNum = (TextView)findViewById(R.id.UserScoreNum);
+        CpScoreNum = (TextView)findViewById(R.id.CpScoreNum);
+        DisplayWinner = (TextView)findViewById(R.id.DisplayWinner);
+
+        Intent intent = getIntent();
+        int userScore = intent.getIntExtra(GameStartActivity.USER_SCORE, 0);
+        int cpScore = intent.getIntExtra(GameStartActivity.CP_SCORE, 0);
+
+        System.out.println("CP SCORE: " + cpScore + "   USER SCORE: " + userScore);
+
+        if(userScore > cpScore){
+            DisplayWinner.setText("You win!");
+        }else if(cpScore > userScore){
+            DisplayWinner.setText("Computer wins!");
+        }else{
+            DisplayWinner.setText("Tie!");
+        }
+
+        UserScoreNum.setText(""+userScore);
+        CpScoreNum.setText(""+cpScore);
     }
 
     public void full_screen(View view) {
@@ -37,17 +63,19 @@ public class GameOverActivity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
 
         getWindow().getDecorView().setSystemUiVisibility(mUIFlag);
+
+
     }
 
 
-    public void getSpeechInputTwo(View view) {
+    public void getSpeechInputGoBack2(View view) {
 
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
 
         if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(intent, 15);
+            startActivityForResult(intent, 17);
         } else {
             Toast.makeText(this, "Your Device Doesn't Support Speech Input", Toast.LENGTH_SHORT).show();
         }
@@ -58,7 +86,7 @@ public class GameOverActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         switch (requestCode) {
-            case 15:
+            case 17:
                 if (resultCode == RESULT_OK && data != null) {
                     ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     String userInput = result.get(0);
