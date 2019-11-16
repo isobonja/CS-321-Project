@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
@@ -25,6 +26,7 @@ public class GameStartActivity extends AppCompatActivity {
     protected String userInput;
     protected int themeVal;
     private Game g;
+    private Handler h;
     ImageView userCardImage1;
     ImageView userCardImage2;
     ImageView userCardImage3;
@@ -164,10 +166,18 @@ public class GameStartActivity extends AppCompatActivity {
         //this.themeVal = Integer.parseInt(theme);
 
         setHandImage(themeVal);
-        g.getUser().checkPairs();
-        g.getCp().checkPairs();
-        setHandImage(themeVal);
-        System.out.println("themeVal: " + themeVal);
+        centerMessage.setText("Checking for initial pairs...");
+        this.h = new Handler();
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                g.getUser().checkPairs();
+                g.getCp().checkPairs();
+                setHandImage(themeVal);
+                centerMessage.setText("Your turn");
+            }
+        };
+        h.postDelayed(r, 4000);
     }
 
     public void full_screen(View view) {
@@ -268,7 +278,6 @@ public class GameStartActivity extends AppCompatActivity {
         cpScore.setText("" + g.getCp().
 
                 getScore());
-
     }
 
     public static Integer validColor(String userInput) {
@@ -400,81 +409,65 @@ public class GameStartActivity extends AppCompatActivity {
                         } else if (hasCard == false) {
                             Toast.makeText(this, "Please only ask for cards in your hand!'", Toast.LENGTH_LONG).show();
                         } else {
-                            try {
-                                Thread.sleep(2000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
                             this.g.getUser().getCard(this.g, this.g.getCp(), value);
+                            setHandImage(themeVal);
                             if (g.getUser().getGoFish()) {
-                                voice.speak("GO FISH!", TextToSpeech.QUEUE_FLUSH, null);
+                                centerMessage.setText("GO FISH!");
                             } else {
-                                voice.speak("I have it", TextToSpeech.QUEUE_FLUSH, null);
-
+                                centerMessage.setText("I have the card you asked for");
                             }
-                            try {
-                                Thread.sleep(1000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            setHandImage(themeVal);
-                            try {
-                                Thread.sleep(1000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-
-                            this.g.getUser().checkPairs();
-                            try {
-                                Thread.sleep(2000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            setHandImage(themeVal);
+                            Runnable r = new Runnable() {
+                                @Override
+                                public void run() {
+                                    g.getUser().checkPairs();
+                                    setHandImage(themeVal);
+                                }
+                            };
+                            h.postDelayed(r, 4000);
                             //handImageUser.get(g.getUserHand().size()-1).setVisibility(View.VISIBLE);
-                            System.out.println("hand size user: " + this.g.getUser().getSizeHand() + "\n hand size cp: " + this.g.getCp().getSizeHand() +
-                                    "\n user score: " + this.g.getUser().getScore() + "\n cp score: " + this.g.getCp().getScore());
+//                            System.out.println("hand size user: " + this.g.getUser().getSizeHand() + "\n hand size cp: " + this.g.getCp().getSizeHand() +
+//                                    "\n user score: " + this.g.getUser().getScore() + "\n cp score: " + this.g.getCp().getScore());
 
                             if (checkIfGameOver()) {
                                 //FIXME
                             }
-                            try {
-                                Thread.sleep(3000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
 
                             while (g.getTurn() == false) {
-                                voice.speak("My turn", TextToSpeech.QUEUE_FLUSH, null);
-                                try {
-                                    Thread.sleep(3000);
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
+                                centerMessage.setText("Computer's turn");
+                                Runnable r2 = new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                    }
+                                };
+                                h.postDelayed(r2, 4000);
+
+                                //voice.speak("My turn", TextToSpeech.QUEUE_FLUSH, null);
 
                                 int c = this.g.getCp().getCard(this.g, this.g.getUser());
-                                voice.speak("I asked for a " + c, TextToSpeech.QUEUE_FLUSH, null);
-                                try {
-                                    Thread.sleep(2000);
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
+                                centerMessage.setText("I asked for a " + c);
+                                Runnable r3 = new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                    }
+                                };
+                                h.postDelayed(r3, 4000);
+                                //voice.speak("I asked for a " + c, TextToSpeech.QUEUE_FLUSH, null);
+
                                 if (g.getCp().getGoFish()) {
-                                    voice2.speak("GO FISH!", TextToSpeech.QUEUE_FLUSH, null);
+                                    //voice2.speak("GO FISH!", TextToSpeech.QUEUE_FLUSH, null);
+                                    centerMessage.setText("GO FISH!");
+                                    Runnable r4 = new Runnable() {
+                                        @Override
+                                        public void run() {
+                                        }
+                                    };
+                                    h.postDelayed(r4, 4000);
                                 }
                                 this.g.getCp().checkPairs();
-                                try {
-                                    Thread.sleep(1000);
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
 
                                 setHandImage(themeVal);
-                            }
-                            try {
-                                Thread.sleep(1000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
                             }
 
                             if (checkIfGameOver()) {
