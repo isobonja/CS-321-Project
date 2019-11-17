@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.SystemClock;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
@@ -29,6 +30,7 @@ public class GameStartActivity extends AppCompatActivity {
     protected int themeVal;
     protected Game g;
     private Handler h;
+    private Handler h2;
     ImageView userCardImage1;
     ImageView userCardImage2;
     ImageView userCardImage3;
@@ -169,7 +171,8 @@ public class GameStartActivity extends AppCompatActivity {
 
         setHandImage(themeVal);
         centerMessage.setText("Checking for initial pairs...");
-        this.h = new Handler();
+        this.h2 = new Handler(Looper.getMainLooper());
+        this.h = new Handler(Looper.getMainLooper());
         Runnable r = new Runnable() {
             @Override
             public void run() {
@@ -279,7 +282,6 @@ public class GameStartActivity extends AppCompatActivity {
 
         System.out.println("Beginning: " + this.g.getUserHand().size() + "   " + this.g.getCpHand().size() + "   " + this.g.getDeck().size());
 
-
         if (userInput.contains("exit")) {
             this.finish();
         } else if (userInput.contains("do you have")) {
@@ -287,9 +289,7 @@ public class GameStartActivity extends AppCompatActivity {
             final int value = validOriginal(userInput);
             System.out.println("value: " + value);
             boolean hasCard = checkIfUserHasCard(value);
-            if (value == 0) {
-                Toast.makeText(this, "Please ask in the following format: 'Do you have a nine?'", Toast.LENGTH_LONG).show();
-            } else if (hasCard == false) {
+            if (hasCard == false || value == 0) {
                 Toast.makeText(this, "Please only ask for cards in your hand!'", Toast.LENGTH_LONG).show();
             } else {
                 final User tmpUser = this.g.getUser();
@@ -297,142 +297,181 @@ public class GameStartActivity extends AppCompatActivity {
                 final Computer tmpCp = this.g.getCp();
                 //if (this.g.getTurn() == true) {
 
+                Runnable r5 = new Runnable() {
+                    @Override
+                    public void run() {
+                        System.out.println("Before getCard, turn is " + g.getTurn());
+                        tmpUser.getCard(g, tmpCp, value);
+                        System.out.println("After getCard, turn is " + g.getTurn());
 
-                    Runnable r5 = new Runnable() {
-                        @Override
-                        public void run() {
-                            System.out.println("Before getCard, turn is " +g.getTurn());
-                            tmpUser.getCard(g, tmpCp, value);
-                            System.out.println("After getCard, turn is " + g.getTurn());
-
-                            setHandImage(themeVal);
-                            if (g.getUser().getGoFish()) {
-                                centerMessage.setText("GO FISH!");
-                                //setTurn(false);
-                            } else {
-                                centerMessage.setText("I have the card!");
-                            }
-
+                        setHandImage(themeVal);
+                        if (g.getUser().getGoFish()) {
+                            centerMessage.setText("GO FISH! You drew a " + g.getUserHand().get(g.getUserHand().size() - 1));
+                            //setTurn(false);
+                        } else {
+                            centerMessage.setText("I have the card! Your turn again!");
                         }
-                    };
-                    System.out.println("Outside of the runnable, turn is " + g.getTurn());
-                    h.postDelayed(r5, 2000);
+                    }
+                };
+                System.out.println("Outside of the runnable, turn is " + g.getTurn());
+                h.postDelayed(r5, 2000);
 
 
+                Runnable rUserGoFish = new Runnable() {
+                    @Override
+                    public void run() {
+                        System.out.println("rUserGoFish");
+                        setHandImage(themeVal);
+                    }
+                };
 
-                    Runnable rUserGoFish = new Runnable() {
-                        @Override
-                        public void run() {
-                            System.out.println("rUserGoFish");
-                            setHandImage(themeVal);
+                h.postDelayed(rUserGoFish, 1000);
 
+                Runnable r6 = new Runnable() {
+                    @Override
+                    public void run() {
+                        g.getUser().checkPairs();
+                        setHandImage(themeVal);
+                        //centerMessage.setText("Your Turn");
+                        System.out.println("INSIDE: " + tmpG.getUserHand().size() + "   " + tmpG.getCpHand().size() + "   " + tmpG.getDeck().size());
+                        if (checkIfGameOver()) {
+                            Intent gameOverIntent = new Intent(GameStartActivity.this, GameOverActivity.class);
+                            gameOverIntent.putExtra(USER_SCORE, tmpUser.getScore());
+                            gameOverIntent.putExtra(CP_SCORE, tmpCp.getScore());
+                            startActivity(gameOverIntent);
                         }
-                    };
-
-                    h.postDelayed(rUserGoFish, 4000);
-
-                    Runnable r = new Runnable() {
-                        @Override
-                        public void run() {
-                            g.getUser().checkPairs();
-                            setHandImage(themeVal);
-                            centerMessage.setText("Your Turn");
-                            System.out.println("INSIDE: " + tmpG.getUserHand().size() + "   " + tmpG.getCpHand().size() + "   " + tmpG.getDeck().size());
-                            if (checkIfGameOver()) {
-                                Intent gameOverIntent = new Intent(GameStartActivity.this, GameOverActivity.class);
-                                gameOverIntent.putExtra(USER_SCORE, tmpUser.getScore());
-                                gameOverIntent.putExtra(CP_SCORE, tmpCp.getScore());
-                                startActivity(gameOverIntent);
-                            }
-                            System.out.println("r");
-                        }
-                    };
-                    h.postDelayed(r, 4000);
-                    //handImageUser.get(g.getUserHand().size()-1).setVisibility(View.VISIBLE);
+                        System.out.println("TURN = " + g.getTurn());
+                        System.out.println("r6");
+                    }
+                };
+                h.postDelayed(r6, 2000);
+                //handImageUser.get(g.getUserHand().size()-1).setVisibility(View.VISIBLE);
 //                            System.out.println("hand size user: " + this.g.getUser().getSizeHand() + "\n hand size cp: " + this.g.getCp().getSizeHand() +
 //                                    "\n user score: " + this.g.getUser().getScore() + "\n cp score: " + this.g.getCp().getScore());
 
-                    System.out.println(this.g.getUserHand().size() + "   " + this.g.getCpHand().size() + "   " + this.g.getDeck().size());
+                System.out.println(this.g.getUserHand().size() + "   " + this.g.getCpHand().size() + "   " + this.g.getDeck().size());
 
-
-                    //centerMessage.setText("Your Turn");
-                    System.out.println("TURN IS " + g.getTurn());
+                //centerMessage.setText("Your Turn");
+                System.out.println("TURN IS " + g.getTurn());
                 //}
 
 //                if(!this.g.getTurn()){
 //                    centerMessage.setText("Computer's Turn");
 //                }i
 
-
                 //COMPUTER'S TURN
-                while (g.getTurn() == false) {
-                    System.out.println("INSIDE COMPUTER WHILE LOOP");
-//                        if (checkIfGameOver()) {
-//                            Intent gameOverIntent = new Intent(GameStartActivity.this, GameOverActivity.class);
-//                            gameOverIntent.putExtra(USER_SCORE, this.g.getUser().getScore());
-//                            gameOverIntent.putExtra(CP_SCORE, this.g.getCp().getScore());
-//                            startActivity(gameOverIntent);
-//                        }
+                Runnable CP = new Runnable() {
+                    @Override
+                    public void run() {
 
-                    Runnable r2 = new Runnable() {
-                        @Override
-                        public void run() {
-                            System.out.println("r2");
-                            centerMessage.setText("Computer's turn");
-                            setHandImage(themeVal);
 
-                        }
-                    };
-                    h.postDelayed(r2, 3000);
-
-                    //voice.speak("My turn", TextToSpeech.QUEUE_FLUSH, null);
-
-                    final int c = tmpG.getCp().getCard(tmpG, tmpG.getUser());
-                    Runnable r3 = new Runnable() {
-                        @Override
-                        public void run() {
-                            System.out.println("r3");
-                            setHandImage(themeVal);
-                            centerMessage.setText("I asked for a " + c);
-                        }
-                    };
-                    h.postDelayed(r3, 4000);
-                    //voice.speak("I asked for a " + c, TextToSpeech.QUEUE_FLUSH, null);
-
-                    if (g.getCp().getGoFish()) {
-                        //voice2.speak("GO FISH!", TextToSpeech.QUEUE_FLUSH, null);
-                        //centerMessage.setText("GO FISH!");
-                        Runnable r4 = new Runnable() {
+                        new Thread() {
                             @Override
                             public void run() {
-                                tmpG.getCp().checkPairs();
-                                System.out.println("r4");
-                                setHandImage(themeVal);
-                                centerMessage.setText("Your Turn");
+
+
+                                int i = 0;
+                                while (g.getTurn() == false) {
+                                    System.out.println("INSIDE COMPUTER WHILE LOOP");
+                                    if (checkIfGameOver()) {
+                                        Intent gameOverIntent = new Intent(GameStartActivity.this, GameOverActivity.class);
+                                        gameOverIntent.putExtra(USER_SCORE, tmpG.getUser().getScore());
+                                        gameOverIntent.putExtra(CP_SCORE, tmpG.getCp().getScore());
+                                        startActivity(gameOverIntent);
+                                    }
+                                    //centerMessage.setText("Computer's turn");
+                                    try {
+                                        Thread.sleep(2000);
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
+                                    try {
+                                        final int c = tmpG.getCp().getCard(tmpG, tmpG.getUser());
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                System.out.println("r2");
+                                                centerMessage.setText("Computer's Turn!\nI asked for a " + c);
+                                                //setHandImage(themeVal);
+                                            }
+                                        });
+                                        //h2.postDelayed(r2, 3000 + i * 2000);
+                                        Thread.sleep(2000);
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                    //voice.speak("My turn", TextToSpeech.QUEUE_FLUSH, null);
+
+                                    try {
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                System.out.println("r3");
+                                                tmpG.getCp().checkPairs();
+                                                if (!(tmpG.getCp().getGoFish())) {
+                                                    setHandImage(themeVal);
+                                                }
+                                            }
+                                        });
+
+                                        Thread.sleep(2000);
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
+                                    //voice.speak("I asked for a " + c, TextToSpeech.QUEUE_FLUSH, null);
+
+                                    if (g.getCp().getGoFish()) {
+                                        try {
+                                            runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    centerMessage.setText("Computer GO FISH!");
+                                                    tmpG.getCp().checkPairs();
+                                                    System.out.println("r4");
+                                                    setHandImage(themeVal);
+                                                }
+                                            });
+
+                                            Thread.sleep(3000);
+                                        } catch (InterruptedException e) {
+                                            e.printStackTrace();
+                                        }
+                                        try {
+                                            runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    centerMessage.setText("Your turn");
+                                                }
+                                            });
+
+                                            Thread.sleep(3000);
+                                        } catch (InterruptedException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+
+                                    System.out.println("In cp: " + tmpG.getUserHand().size() + "   " + tmpG.getCpHand().size() + "   " + tmpG.getDeck().size());
+
+                                    if (checkIfGameOver()) {
+                                        Intent gameOverIntent = new Intent(GameStartActivity.this, GameOverActivity.class);
+                                        gameOverIntent.putExtra(USER_SCORE, tmpG.getUser().getScore());
+                                        gameOverIntent.putExtra(CP_SCORE, tmpG.getCp().getScore());
+                                        startActivity(gameOverIntent);
+                                    }
+                                    i++;
+                                }
                             }
-                        };
-                        h.postDelayed(r4, 5000);
+                        }.start();
                     }
-
-
-                    System.out.println("In cp: " + this.g.getUserHand().size() + "   " + this.g.getCpHand().size() + "   " + this.g.getDeck().size());
-
-                    if (checkIfGameOver()) {
-                        Intent gameOverIntent = new Intent(GameStartActivity.this, GameOverActivity.class);
-                        gameOverIntent.putExtra(USER_SCORE, this.g.getUser().getScore());
-                        gameOverIntent.putExtra(CP_SCORE, this.g.getCp().getScore());
-                        startActivity(gameOverIntent);
-                    }
-
-                }
-
+                };
+                h2.postDelayed(CP, 6000);
 
             }
         } else {
-            Toast.makeText(this, "Please ask for a card you have or say 'Exit' to exit the game", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Please ask for a card you have in the following format: 'Do you have a nine?' or say 'Exit' to exit the game", Toast.LENGTH_LONG).show();
         }
     }
-
 
     public void onActivityAnimal(ArrayList<String> result) {
         userInput = result.get(0);
@@ -750,31 +789,32 @@ public class GameStartActivity extends AppCompatActivity {
 
     public static Integer validOriginal(String userInput) {
         Integer value = 0;
-        if (userInput.contains("ace")) {
+        if (userInput.equalsIgnoreCase("do you have an ace") || userInput.equalsIgnoreCase("do you have a ace")) {
             return 1;
-        } else if (userInput.contains("2") || userInput.contains("two")) {
+        } else if (userInput.equalsIgnoreCase("do you have a 2") || userInput.equalsIgnoreCase("do you have a two")) {
             return 2;
-        } else if (userInput.contains("3") || userInput.contains("three")) {
+        } else if (userInput.equalsIgnoreCase("do you have a 3") || userInput.equalsIgnoreCase("do you have a three")) {
             return 3;
-        } else if (userInput.contains("4") || userInput.contains("four")) {
+        } else if (userInput.equalsIgnoreCase("do you have a 4") || userInput.equalsIgnoreCase("do you have a four")) {
             return 4;
-        } else if (userInput.contains("5") || userInput.contains("five")) {
+        } else if (userInput.equalsIgnoreCase("do you have a 5") || userInput.equalsIgnoreCase("do you have a five")) {
             return 5;
-        } else if (userInput.contains("6") || userInput.contains("six")) {
+        } else if (userInput.equalsIgnoreCase("do you have a 6") || userInput.equalsIgnoreCase("do you have a six")) {
             return 6;
-        } else if (userInput.contains("7") || userInput.contains("seven")) {
+        } else if (userInput.equalsIgnoreCase("do you have a 7") || userInput.equalsIgnoreCase("do you have a seven")) {
             return 7;
-        } else if (userInput.contains("8") || userInput.contains("eight")) {
+        } else if (userInput.equalsIgnoreCase("do you have a 8") || userInput.equalsIgnoreCase("do you have a eight") ||
+                userInput.equalsIgnoreCase("do you have an eight") || userInput.equalsIgnoreCase("do you have an 8")) {
             return 8;
-        } else if (userInput.contains("9") || userInput.contains("nine")) {
+        } else if (userInput.equalsIgnoreCase("do you have a 9") || userInput.equalsIgnoreCase("do you have a nine")) {
             return 9;
-        } else if (userInput.contains("10") || userInput.contains("ten")) {
+        } else if (userInput.equalsIgnoreCase("do you have a 10") || userInput.equalsIgnoreCase("do you have a ten")) {
             return 10;
-        } else if (userInput.contains("jack")) {
+        } else if (userInput.equalsIgnoreCase("do you have a jack") || userInput.equalsIgnoreCase("do you have a j")) {
             return 11;
-        } else if (userInput.contains("queen")) {
+        } else if (userInput.equalsIgnoreCase("do you have a queen") || userInput.equalsIgnoreCase("do you have a q")) {
             return 12;
-        } else if (userInput.contains("king")) {
+        } else if (userInput.equalsIgnoreCase("do you have a king") || userInput.equalsIgnoreCase("do you have a k")) {
             return 13;
         } else {
             return value;
@@ -883,5 +923,4 @@ public class GameStartActivity extends AppCompatActivity {
     public void setTurn(boolean b) {
         this.g.setTurn(b);
     }
-
 }
