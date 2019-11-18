@@ -306,7 +306,7 @@ public class GameStartActivity extends AppCompatActivity {
 
                         setHandImage(themeVal);
                         if (g.getUser().getGoFish()) {
-                            centerMessage.setText("GO FISH! You drew a " + g.getUserHand().get(g.getUserHand().size() - 1));
+                            centerMessage.setText("GO FISH! You drew a " + originalTextConvert(g.getUserHand().get(g.getUserHand().size() - 1)));
                             //setTurn(false);
                         } else {
                             centerMessage.setText("I have the card! Your turn again!");
@@ -387,11 +387,13 @@ public class GameStartActivity extends AppCompatActivity {
                                     }
                                     try {
                                         final int c = tmpG.getCp().getCard(tmpG, tmpG.getUser());
+
+
                                         runOnUiThread(new Runnable() {
                                             @Override
                                             public void run() {
                                                 System.out.println("r2");
-                                                centerMessage.setText("Computer's Turn!\nI asked for a " + c);
+                                                centerMessage.setText("Computer's Turn!\nI asked for a " + originalTextConvert(c));
                                                 //setHandImage(themeVal);
                                             }
                                         });
@@ -465,7 +467,7 @@ public class GameStartActivity extends AppCompatActivity {
                         }.start();
                     }
                 };
-                h2.postDelayed(CP, 6000);
+                h2.postDelayed(CP, 3000);
 
             }
         } else {
@@ -918,6 +920,21 @@ public class GameStartActivity extends AppCompatActivity {
         } else {
             return 0;
         }
+    }
+
+    public String originalTextConvert(int v){
+        if(v == 1){
+            return "ace";
+        }else if(v == 11){
+            return "jack";
+        }else if(v == 12){
+            return "queen";
+        }else if(v == 13){
+            return "king";
+        }else{
+            return Integer.toString(v);
+        }
+    }
     }
 
     public void setTurn(boolean b) {
