@@ -745,7 +745,7 @@ public class GameStartActivity extends AppCompatActivity {
 
     public static Integer validFruit(String userInput) {
         Integer value = 0;
-        if (userInput.contains("apple")) {
+        if (userInput.contains("apple") && !userInput.contains("pineapple")) {
             return 1;
         } else if (userInput.contains("banana")) {
             return 2;
