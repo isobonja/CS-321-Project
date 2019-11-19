@@ -8,14 +8,17 @@
     android:onClick="full_screen"
     tools:context=".MainActivity">
 
+
     <Button
         android:id="@+id/startGame2"
-        android:layout_width="133dp"
-        android:layout_height="79dp"
+        android:layout_width="111dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="296dp"
         android:layout_marginRight="296dp"
-        android:background="#FFFFFF"
+        android:background="#AEECDFBB"
         android:filterTouchesWhenObscured="false"
+        android:gravity="center"
         android:onClick="clickButton"
         android:shadowColor="#393A3C"
         android:text="@string/start"
@@ -23,25 +26,30 @@
         android:textSize="36sp"
         app:fontFamily="@font/anton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.956"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <Button
 
         android:id="@+id/startGame"
-        android:layout_width="291dp"
-        android:layout_height="78dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="220dp"
-        android:layout_marginRight="220dp"
-        android:background="#FFFFFF"
+        android:layout_width="222dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="244dp"
+        android:layout_marginRight="244dp"
+        android:background="#AEECDFBB"
         android:onClick="clickButton"
         android:text="@string/how_to_play"
         android:textColor="#AD3535"
         android:textSize="36sp"
         app:fontFamily="@font/anton"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/startGame2" />
-
+        app:layout_constraintHorizontal_bias="0.958"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/startGame2"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/title"
