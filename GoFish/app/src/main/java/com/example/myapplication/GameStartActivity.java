@@ -92,7 +92,6 @@ public class GameStartActivity extends AppCompatActivity {
                 }
             }
         });
-
         voice2 = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int i) {
@@ -219,7 +218,7 @@ public class GameStartActivity extends AppCompatActivity {
 
         if (intent.resolveActivity(getPackageManager()) != null) {
 //            if (themeVal == 0) { //original
-                startActivityForResult(intent, 13);
+            startActivityForResult(intent, 13);
 //            }
 //            if (themeVal == 1) { //animals
 //                startActivityForResult(intent, 14);
@@ -315,10 +314,10 @@ public class GameStartActivity extends AppCompatActivity {
 
                         setHandImage(themeVal);
                         if (g.getUser().getGoFish()) {
-                            centerMessage.setText("GO FISH! You drew a " + textConvert(g.getUserHand().get(g.getUserHand().size() - 1)));
+                            centerMessage.setText("GO FISH!\nYou drew a " + textConvert(g.getUserHand().get(g.getUserHand().size() - 1)));
                             //setTurn(false);
                         } else {
-                            centerMessage.setText("I have the card! Your turn again!");
+                            centerMessage.setText("I have the card!\nYour turn again!");
                         }
                     }
                 };
