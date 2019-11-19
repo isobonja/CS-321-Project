@@ -4,22 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:onClick="full_screen">
+    android:background="#747BC5FF"
+    android:onClick="full_screen"
+    tools:context=".MainActivity">
 
     <Button
         android:id="@+id/startGame2"
         android:layout_width="133dp"
         android:layout_height="79dp"
-        android:layout_marginTop="20dp"
         android:layout_marginEnd="296dp"
         android:layout_marginRight="296dp"
-        android:onClick="clickButton"
+        android:background="#FFFFFF"
         android:filterTouchesWhenObscured="false"
+        android:onClick="clickButton"
         android:shadowColor="#393A3C"
         android:text="@string/start"
         android:textColor="#AD3535"
-        android:textSize="30sp"
+        android:textSize="36sp"
+        app:fontFamily="@font/anton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
@@ -28,26 +30,29 @@
         android:id="@+id/startGame"
         android:layout_width="291dp"
         android:layout_height="78dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="220dp"
         android:layout_marginRight="220dp"
+        android:background="#FFFFFF"
         android:onClick="clickButton"
         android:text="@string/how_to_play"
-        android:textSize="30sp"
+        android:textColor="#AD3535"
+        android:textSize="36sp"
+        app:fontFamily="@font/anton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/startGame2" />
 
-    <TextView
+
+    <ImageView
         android:id="@+id/title"
-        android:layout_width="339dp"
-        android:layout_height="71dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="196dp"
-        android:layout_marginRight="196dp"
+        android:layout_width="600dp"
+        android:layout_height="153dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginRight="44dp"
         android:capitalize="characters"
         android:ems="10"
         android:inputType="textPersonName|textCapSentences"
-        android:text="HANDS FREE GO FISH!"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="#000000"
@@ -56,9 +61,8 @@
         android:typeface="normal"
         app:fontFamily="@font/anton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/download" />
 
     <ImageView
         android:id="@+id/mic"

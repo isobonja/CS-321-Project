@@ -14,6 +14,7 @@
         android:layout_height="54dp"
         android:layout_marginTop="110dp"
         android:text="Computer :"
+        android:fontFamily="@font/anton"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.05"
@@ -26,6 +27,7 @@
         android:layout_height="47dp"
         android:layout_marginTop="24dp"
         android:text="You :"
+        android:fontFamily="@font/anton"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.049"
@@ -38,6 +40,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="24dp"
         android:text="0"
+        android:fontFamily="@font/anton"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.186"
@@ -48,11 +51,12 @@
         android:id="@+id/cpScore"
         android:layout_width="83dp"
         android:layout_height="50dp"
-        android:layout_marginTop="110dp"
+        android:layout_marginTop="112dp"
+        android:fontFamily="@font/anton"
         android:text="0"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.341"
+        app:layout_constraintHorizontal_bias="0.319"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -63,6 +67,8 @@
         android:layout_marginTop="90dp"
         android:text="Deck"
         android:textSize="36sp"
+        android:fontFamily="@font/anton"
+
         app:layout_constraintBottom_toTopOf="@+id/DeckImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.93"
@@ -72,18 +78,19 @@
 
     <TextView
         android:id="@+id/centerMessage"
-        android:layout_width="363dp"
+        android:layout_width="301dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:text="Your Turn"
+        android:textSize="36sp"
+        android:fontFamily="@font/anton"
         android:textAlignment="center"
-        android:textSize="30sp"
+        android:elegantTextHeight="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.591"
+        app:layout_constraintHorizontal_bias="0.548"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.53" />
+        app:layout_constraintVertical_bias="0.533" />
 
     <ImageView
         android:id="@+id/computerCardImage1"
