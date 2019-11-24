@@ -60,8 +60,8 @@ public class GameStartActivity extends AppCompatActivity {
     TextView userScore;
     TextView cpScore;
     TextView centerMessage;
-    TextToSpeech voice;
-    TextToSpeech voice2;
+    //TextToSpeech voice;
+    //TextToSpeech voice2;
 
     private ArrayList<ImageView> handImageUser;
     private ArrayList<ImageView> handImageCp;
@@ -82,7 +82,7 @@ public class GameStartActivity extends AppCompatActivity {
         getWindow().getDecorView().setSystemUiVisibility(mUIFlag);
         g = new Game(themeVal);
 
-        voice = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+        /*voice = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int i) {
                 if (i != TextToSpeech.ERROR) {
@@ -92,7 +92,6 @@ public class GameStartActivity extends AppCompatActivity {
                 }
             }
         });
-
         voice2 = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int i) {
@@ -102,7 +101,7 @@ public class GameStartActivity extends AppCompatActivity {
                     voice2.setPitch((float) 0.2);
                 }
             }
-        });
+        });*/
 
         handImageUser = new ArrayList<ImageView>();
         handImageCp = new ArrayList<ImageView>();
@@ -161,7 +160,6 @@ public class GameStartActivity extends AppCompatActivity {
         userScore = (TextView) findViewById(R.id.userScore);
         cpScore = (TextView) findViewById(R.id.cpScore);
         centerMessage = (TextView) findViewById(R.id.centerMessage);
-        //centerMessage.setText("Turn!");
 
         Intent intent = getIntent();
         int theme = intent.getIntExtra(StartPageController.THEME, 0);
@@ -171,8 +169,8 @@ public class GameStartActivity extends AppCompatActivity {
 
         setHandImage(themeVal);
         centerMessage.setText("Checking for initial pairs...");
-        this.h2 = new Handler(Looper.getMainLooper());
         this.h = new Handler(Looper.getMainLooper());
+        this.h2 = new Handler(Looper.getMainLooper());
         Runnable r = new Runnable() {
             @Override
             public void run() {
@@ -182,7 +180,7 @@ public class GameStartActivity extends AppCompatActivity {
                 centerMessage.setText("Your turn");
             }
         };
-        h.postDelayed(r, 4000);
+        h.postDelayed(r, 3000);
     }
 
     public void full_screen(View view) {
@@ -219,19 +217,19 @@ public class GameStartActivity extends AppCompatActivity {
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
 
         if (intent.resolveActivity(getPackageManager()) != null) {
-            if (themeVal == 0) { //original
-                startActivityForResult(intent, 13);
-            }
-            if (themeVal == 1) { //animals
-                startActivityForResult(intent, 14);
-            }
-            if (themeVal == 2) { //colors
-                startActivityForResult(intent, 15);
-            }
-            if (themeVal == 3) { //fruits
-                startActivityForResult(intent, 16);
-
-            }
+//            if (themeVal == 0) { //original
+            startActivityForResult(intent, 13);
+//            }
+//            if (themeVal == 1) { //animals
+//                startActivityForResult(intent, 14);
+//            }
+//            if (themeVal == 2) { //colors
+//                startActivityForResult(intent, 15);
+//            }
+//            if (themeVal == 3) { //fruits
+//                startActivityForResult(intent, 16);
+//
+//            }
         } else {
             Toast.makeText(this, "Your Device Doesn't Support Speech Input", Toast.LENGTH_SHORT).show();
         }
@@ -246,37 +244,37 @@ public class GameStartActivity extends AppCompatActivity {
             case 13:
                 if (resultCode == RESULT_OK && data != null) {
                     ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                    this.onActivityOriginal(result);
+                    this.onActivity(result);
                 }
                 break;
 
             //animals
-            case 14:
-                if (resultCode == RESULT_OK && data != null) {
-                    ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                    this.onActivityAnimal(result);
-                }
-                break;
-
-            //colors
-            case 15:
-                if (resultCode == RESULT_OK && data != null) {
-                    ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                    this.onActivityColor(result);
-                }
-                break;
-
-            //fruits
-            case 16:
-                if (resultCode == RESULT_OK && data != null) {
-                    ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                    this.onActivityFruit(result);
-                }
-                break;
+//            case 14:
+//                if (resultCode == RESULT_OK && data != null) {
+//                    ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+//                    this.onActivityAnimal(result);
+//                }
+//                break;
+//
+//            //colors
+//            case 15:
+//                if (resultCode == RESULT_OK && data != null) {
+//                    ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+//                    this.onActivityColor(result);
+//                }
+//                break;
+//
+//            //fruits
+//            case 16:
+//                if (resultCode == RESULT_OK && data != null) {
+//                    ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+//                    this.onActivityFruit(result);
+//                }
+//                break;
         }
     }
 
-    public void onActivityOriginal(ArrayList<String> result) {
+    public void onActivity(ArrayList<String> result) {
         userInput = result.get(0);
         userInput = userInput.toLowerCase();
 
@@ -285,8 +283,17 @@ public class GameStartActivity extends AppCompatActivity {
         if (userInput.contains("exit")) {
             this.finish();
         } else if (userInput.contains("do you have")) {
+            int value = 0;
+            if(themeVal == 0) {
+                value = validOriginal(userInput);
+            }else if(themeVal == 1){
+                value = validAnimal(userInput);
+            }else if(themeVal == 2){
+                value = validColor(userInput);
+            }else if(themeVal == 3){
+                value = validFruit(userInput);
+            }
 
-            final int value = validOriginal(userInput);
             System.out.println("value: " + value);
             boolean hasCard = checkIfUserHasCard(value);
             if (hasCard == false || value == 0) {
@@ -295,21 +302,22 @@ public class GameStartActivity extends AppCompatActivity {
                 final User tmpUser = this.g.getUser();
                 final Game tmpG = this.g;
                 final Computer tmpCp = this.g.getCp();
+                final int finalValue = value;
                 //if (this.g.getTurn() == true) {
 
                 Runnable r5 = new Runnable() {
                     @Override
                     public void run() {
                         System.out.println("Before getCard, turn is " + g.getTurn());
-                        tmpUser.getCard(g, tmpCp, value);
+                        tmpUser.getCard(g, tmpCp, finalValue);
                         System.out.println("After getCard, turn is " + g.getTurn());
 
                         setHandImage(themeVal);
                         if (g.getUser().getGoFish()) {
-                            centerMessage.setText("GO FISH! You drew a " + originalTextConvert(g.getUserHand().get(g.getUserHand().size() - 1)));
+                            centerMessage.setText("GO FISH!\nYou drew a " + textConvert(g.getUserHand().get(g.getUserHand().size() - 1)));
                             //setTurn(false);
                         } else {
-                            centerMessage.setText("I have the card! Your turn again!");
+                            centerMessage.setText("I have the card!\nYour turn again!");
                         }
                     }
                 };
@@ -393,7 +401,7 @@ public class GameStartActivity extends AppCompatActivity {
                                             @Override
                                             public void run() {
                                                 System.out.println("r2");
-                                                centerMessage.setText("Computer's Turn!\nI asked for a " + originalTextConvert(c));
+                                                centerMessage.setText("Computer's Turn!\nI asked for a " + textConvert(c));
                                                 //setHandImage(themeVal);
                                             }
                                         });
@@ -473,161 +481,6 @@ public class GameStartActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Please ask for a card you have in the following format: 'Do you have a nine?' or say 'Exit' to exit the game", Toast.LENGTH_LONG).show();
         }
-    }
-
-    public void onActivityAnimal(ArrayList<String> result) {
-        userInput = result.get(0);
-        userInput = userInput.toLowerCase();
-
-        if (userInput.contains("exit")) {
-            this.finish();
-        } else if (userInput.contains("do you have")) {
-            int value = validAnimal(userInput);
-            System.out.println("value: " + value);
-            boolean hasCard = checkIfUserHasCard(value);
-            if (value == 0) {
-                Toast.makeText(this, "Please ask in the following format: 'Do you have a dog?'", Toast.LENGTH_LONG).show();
-            } else if (hasCard == false) {
-                Toast.makeText(this, "Please only ask for cards in your hand!'", Toast.LENGTH_LONG).show();
-            } else {
-                System.out.println("hand size user: " + this.g.getUser().getSizeHand() + "\n hand size cp: " + this.g.getCp().getSizeHand() +
-                        "\n user score: " + this.g.getUser().getScore() + "\n cp score: " + this.g.getCp().getScore());
-                this.g.getUser().getCard(this.g, this.g.getCp(), value);
-                this.g.getUser().checkPairs();
-                setHandImage(themeVal);
-                System.out.println("hand size user: " + this.g.getUser().getSizeHand() + "\n hand size cp: " + this.g.getCp().getSizeHand() +
-                        "\n user score: " + this.g.getUser().getScore() + "\n cp score: " + this.g.getCp().getScore());
-
-                if (checkIfGameOver()) {
-                    startActivity(new Intent(GameStartActivity.this, GameOverActivity.class));
-                }
-
-                if (g.getTurn() == false) {
-                    centerMessage.setText("Computer Turn");
-
-                    this.g.getCp().getCard(this.g, this.g.getUser());
-                    this.g.getCp().checkPairs();
-
-                    setHandImage(themeVal);
-                }
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                centerMessage.setText("Your Turn");
-
-                if (checkIfGameOver()) {
-                    startActivity(new Intent(GameStartActivity.this, GameOverActivity.class));
-                }
-            }
-        } else {
-            Toast.makeText(this, "Please ask for a card you have or say 'Exit' to exit the game", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    public void onActivityColor(ArrayList<String> result) {
-        userInput = result.get(0);
-        userInput = userInput.toLowerCase();
-
-        if (userInput.contains("exit")) {
-            this.finish();
-        } else if (userInput.contains("do you have")) {
-            int value = validColor(userInput);
-            System.out.println("value: " + value);
-            boolean hasCard = checkIfUserHasCard(value);
-            if (value == 0) {
-                Toast.makeText(this, "Please ask in the following format: 'Do you have a red?'", Toast.LENGTH_LONG).show();
-            } else if (hasCard == false) {
-                Toast.makeText(this, "Please only ask for cards in your hand!'", Toast.LENGTH_LONG).show();
-            } else {
-                System.out.println("hand size user: " + this.g.getUser().getSizeHand() + "\n hand size cp: " + this.g.getCp().getSizeHand() +
-                        "\n user score: " + this.g.getUser().getScore() + "\n cp score: " + this.g.getCp().getScore());
-                this.g.getUser().getCard(this.g, this.g.getCp(), value);
-                this.g.getUser().checkPairs();
-                setHandImage(themeVal);
-                System.out.println("hand size user: " + this.g.getUser().getSizeHand() + "\n hand size cp: " + this.g.getCp().getSizeHand() +
-                        "\n user score: " + this.g.getUser().getScore() + "\n cp score: " + this.g.getCp().getScore());
-
-                if (checkIfGameOver()) {
-                    startActivity(new Intent(GameStartActivity.this, GameOverActivity.class));
-                }
-
-                if (g.getTurn() == false) {
-                    centerMessage.setText("Computer Turn");
-
-                    this.g.getCp().getCard(this.g, this.g.getUser());
-                    this.g.getCp().checkPairs();
-
-                    setHandImage(themeVal);
-                }
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                centerMessage.setText("Your Turn");
-
-                if (checkIfGameOver()) {
-                    startActivity(new Intent(GameStartActivity.this, GameOverActivity.class));
-                }
-            }
-        } else {
-            Toast.makeText(this, "Please ask for a card you have or say 'Exit' to exit the game", Toast.LENGTH_LONG).show();
-        }
-
-    }
-
-    public void onActivityFruit(ArrayList<String> result) {
-        userInput = result.get(0);
-        userInput = userInput.toLowerCase();
-
-        if (userInput.contains("exit")) {
-            this.finish();
-        } else if (userInput.contains("do you have")) {
-            int value = validFruit(userInput);
-            System.out.println("value: " + value);
-            boolean hasCard = checkIfUserHasCard(value);
-            if (value == 0) {
-                Toast.makeText(this, "Please ask in the following format: 'Do you have a strawberry?'", Toast.LENGTH_LONG).show();
-            } else if (hasCard == false) {
-                Toast.makeText(this, "Please only ask for cards in your hand!'", Toast.LENGTH_LONG).show();
-            } else {
-                System.out.println("hand size user: " + this.g.getUser().getSizeHand() + "\n hand size cp: " + this.g.getCp().getSizeHand() +
-                        "\n user score: " + this.g.getUser().getScore() + "\n cp score: " + this.g.getCp().getScore());
-                this.g.getUser().getCard(this.g, this.g.getCp(), value);
-                this.g.getUser().checkPairs();
-                setHandImage(themeVal);
-                System.out.println("hand size user: " + this.g.getUser().getSizeHand() + "\n hand size cp: " + this.g.getCp().getSizeHand() +
-                        "\n user score: " + this.g.getUser().getScore() + "\n cp score: " + this.g.getCp().getScore());
-
-                if (checkIfGameOver()) {
-                    startActivity(new Intent(GameStartActivity.this, GameOverActivity.class));
-                }
-
-                if (g.getTurn() == false) {
-                    centerMessage.setText("Computer Turn");
-
-                    this.g.getCp().getCard(this.g, this.g.getUser());
-                    this.g.getCp().checkPairs();
-
-                    setHandImage(themeVal);
-                }
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                centerMessage.setText("Your Turn");
-
-                if (checkIfGameOver()) {
-                    startActivity(new Intent(GameStartActivity.this, GameOverActivity.class));
-                }
-            }
-        } else {
-            Toast.makeText(this, "Please ask for a card you have or say 'Exit' to exit the game", Toast.LENGTH_LONG).show();
-        }
-
     }
 
     public void setHandImage(int themeVal) {
@@ -891,7 +744,7 @@ public class GameStartActivity extends AppCompatActivity {
 
     public static Integer validFruit(String userInput) {
         Integer value = 0;
-        if (userInput.contains("apple")) {
+        if (userInput.contains("apple") && !userInput.contains("pineapple")) {
             return 1;
         } else if (userInput.contains("banana")) {
             return 2;
@@ -922,20 +775,107 @@ public class GameStartActivity extends AppCompatActivity {
         }
     }
 
-    public String originalTextConvert(int v){
-        if(v == 1){
-            return "ace";
-        }else if(v == 11){
-            return "jack";
-        }else if(v == 12){
-            return "queen";
-        }else if(v == 13){
-            return "king";
-        }else{
-            return Integer.toString(v);
+    public String textConvert(int v){
+        if(themeVal == 0) {
+            if (v == 1) {
+                return "ace";
+            } else if (v == 11) {
+                return "jack";
+            } else if (v == 12) {
+                return "queen";
+            } else if (v == 13) {
+                return "king";
+            } else {
+                return Integer.toString(v);
+            }
+        }else if(themeVal == 1){
+            if (v == 1) {
+                return "cat";
+            } else if (v == 2) {
+                return "dog";
+            } else if (v == 3) {
+                return "snake";
+            } else if (v == 4) {
+                return "monkey";
+            } else if (v == 5) {
+                return "pig";
+            } else if (v == 6) {
+                return "bear";
+            } else if (v == 7) {
+                return "shark";
+            } else if (v == 8) {
+                return "bird";
+            } else if (v == 9) {
+                return "duck";
+            } else if (v == 10) {
+                return "spider";
+            } else if (v == 11) {
+                return "sheep";
+            } else if (v == 12) {
+                return "lizard";
+            } else if (v == 13) {
+                return "bee";
+            }
+        }else if(themeVal == 2){
+            if (v == 1) {
+                return "red";
+            } else if (v == 2) {
+                return "orange";
+            } else if (v == 3) {
+                return "yellow";
+            } else if (v == 4) {
+                return "green";
+            } else if (v == 5) {
+                return "blue";
+            } else if (v == 6) {
+                return "purple";
+            } else if (v == 7) {
+                return "pink";
+            } else if (v == 8) {
+                return "black";
+            } else if (v == 9) {
+                return "white";
+            } else if (v == 10) {
+                return "gray";
+            } else if (v == 11) {
+                return "brown";
+            } else if (v == 12) {
+                return "rainbow";
+            } else if (v == 13) {
+                return "tan";
+            }
+        }else if(themeVal == 3){
+            if (v == 1) {
+                return "apple";
+            } else if (v == 2) {
+                return "banana";
+            } else if (v == 3) {
+                return "orange";
+            } else if (v == 4) {
+                return "pear";
+            } else if (v == 5) {
+                return "watermelon";
+            } else if (v == 6) {
+                return "raspberry";
+            } else if (v == 7) {
+                return "blueberry";
+            } else if (v == 8) {
+                return "coconut";
+            } else if (v == 9) {
+                return "pomegranate";
+            } else if (v == 10) {
+                return "pineapple";
+            } else if (v == 11) {
+                return "strawberry";
+            } else if (v == 12) {
+                return "kiwi";
+            } else if (v == 13) {
+                return "cherry";
+            }
         }
+        return "####";
     }
-    }
+
 
     public void setTurn(boolean b) {
         this.g.setTurn(b);

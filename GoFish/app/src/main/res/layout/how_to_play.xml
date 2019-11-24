@@ -23,9 +23,9 @@
 
     <TextView
         android:id="@+id/theme_selection"
-        android:layout_width="237dp"
-        android:layout_height="65dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="244dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="220dp"
         android:layout_marginRight="220dp"
         android:lineSpacingExtra="8sp"
@@ -38,23 +38,23 @@
 
         app:fontFamily="@font/anton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.901"
+        app:layout_constraintHorizontal_bias="0.91"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="620dp"
-        android:layout_height="293dp"
+        android:layout_width="720dp"
+        android:layout_height="308dp"
         android:layout_marginTop="8dp"
-        android:text="Go-Fish how to play instructions\n\n- This is a Go-Fish game that you play using your voice.\n- The goal of the game is to win with more pair of cards than the computer. A pair of cards is 2 of the same cards.\n- Each player starts with 7 cards. If there is a pair, the pair is removed and a point is added to your score.\n- When it is your turn, click the microphone on the bottom right and ask the computer for a card in your hand. For example, &quot;Do you have a one?&quot; If the computer has the card, it will give it to you, you get a point, and you can go again. If the computer does not have the card, it will say &quot;Go-Fish&quot;. The game will pick up a card from the deck and give it to you, and it is now the computer's turn to ask for a card.\n- The game ends when a player does not have anymore cards in their hand or the deck is empty, and the player with the higher score wins.  To go back to the main menu, click the microphone on the bottom right and say &quot;Back&quot;"
+        android:text="1.) This is a Go-Fish game that you play using your voice.\n\n2.) The goal of the game is to win with more pair of cards than the computer. A pair of cards is 2 of the same cards.\n\n3.) Each player starts with 7 cards. If there is a pair, the pair is removed and a point is added to your score.\n\n4.) When it is your turn, click the microphone on the bottom right and ask the computer for a card in your hand. For example, &quot;Do you have a one?&quot; If the computer has the card, it will give it to you, you get a point, and you can go again. If the computer does not have the card, it will say &quot;Go-Fish&quot;. The game will pick up a card from the deck and give it to you, and it is now the computer's turn to ask for a card.\n\n5.) The game ends when a player does not have anymore cards in their hand or the deck is empty, and the \nplayer with the higher score wins.  To go back to the main menu, click the microphone on the bottom right\nand say &quot;Back&quot;"
         android:textAllCaps="false"
         android:textColor="#000000"
-        android:textSize="13.5sp"
+        android:textSize="14sp"
         android:typeface="normal"
         app:fontFamily="@font/anton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.253"
+        app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/theme_selection" />
 
