@@ -65,6 +65,16 @@ public class Player{
 	{
 		return score;
 	}
+   
+   /**
+    * Adds a specified card to the hand
+    * (currently only used for testing)
+    * 
+    * @param c Card to be added
+    */
+   public void addToHand(Card c){
+      this.hand.add(c);
+   }
 
 	/**
 	 * Checks if a pair is present in the player's hand
